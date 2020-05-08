@@ -1,30 +1,68 @@
 <template>
-  <div id="flipbook">
-    <div>
-      <img
-        ref="first"
-        src="../assets/annualReport/SoIT_AR2020 1.jpeg"
-      >
+  <div
+    ref="flipbook"
+    class="flipbook"
+  >
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 1.jpeg">
     </div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 2.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 3.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 4.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 5.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 6.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 7.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 8.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 9.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 10.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 11.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 12.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 13.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 14.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 15.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 16.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 17.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 18.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 19.jpeg"></div>
-    <div><img src="../assets/annualReport/SoIT_AR2020 20.jpeg"></div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 2.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 3.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 4.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 5.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 6.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 7.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 8.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 9.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 10.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 11.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 12.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 13.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 14.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 15.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 16.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 17.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 18.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 19.jpeg">
+    </div>
+    <div class="page">
+      <img src="../assets/annualReport/SoIT_AR2020 20.jpeg">
+    </div>
   </div>
 </template>
 
@@ -33,29 +71,74 @@ import '@/lib/turn.js';
 
 export default {
   name: `Flipbook`,
+  data() {
+    return {
+      ratio: 1.5,
+    };
+  },
   mounted() {
-    $(`#flipbook`).turn({
-      elevation: 50,
+    $(this.$refs.flipbook).turn({
+      accelerations: true,
       gradients: true,
     });
-    // setTimeout(() => {
-    //   $(`#flipbook`).turn({ height: this.$refs.first.clientHeight });
-    // }, 50);
+    this.$nextTick(function() {
+      window.addEventListener(`resize`, this.getWindowSize);
+      this.getWindowSize();
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener(`resize`, this.getWindowSize);
+  },
+  methods: {
+    getWindowSize() {
+      const { height, width } = this.resize();
+      $(this.$refs.flipbook).turn(`size`, width, height);
+    },
+    resize() {
+      const el = this.$refs.flipbook;
+      // reset the width and height to the css defaults
+      el.style.width = ``;
+      el.style.height = ``;
+
+      let width = el.clientWidth;
+      let height = Math.round(width / this.ratio);
+      const padded = Math.round(document.body.clientHeight * 0.9);
+
+      // if the height is too big for the window, constrain it
+      if (height > padded) {
+        height = padded;
+        width = Math.round(height * this.ratio);
+      }
+
+      // set the width and height matching the aspect ratio
+      el.style.width = `${width}px`;
+      el.style.height = `${height}px`;
+
+      return { width, height };
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-#flipbook {
+.flipbook {
+  margin: 0 auto;
   width: 100%;
-  height: 150%;
-  min-width: 922px;
-  min-height: 600px;
+  height: 90%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
-  img {
-    width: 100%;
-    min-height: 600px;
-    height: auto;
+  .page {
+    height: 100%;
+
+    img {
+      max-width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>
