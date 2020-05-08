@@ -68,7 +68,8 @@
 
         hashes[hash].regexp = hashes[hash].regexp || new RegExp(hash);
 
-        if (parts === hashes[hash].regexp.exec(fragment)) {
+        // eslint-disable-next-line no-cond-assign
+        if (parts = hashes[hash].regexp.exec(fragment)) {
           if (hashes[hash].title)
           { document.title = hashes[hash].title; }
 

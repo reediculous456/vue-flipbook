@@ -68,6 +68,7 @@
 
 <script>
 import '@/lib/turn.js';
+import '@/lib/hash.js';
 
 export default {
   name: `Flipbook`,
@@ -80,10 +81,34 @@ export default {
     $(this.$refs.flipbook).turn({
       accelerations: true,
       gradients: true,
+      when: {
+        turning(e, page) {
+          Hash.go(`page/${page}`).update();
+        },
+      },
     });
+
     this.$nextTick(function() {
       window.addEventListener(`resize`, this.getWindowSize);
       this.getWindowSize();
+
+      const that = this;
+      Hash.on(`^page/([0-9]+)$`, {
+        yep(path, parts) {
+          const [ , page ] = parts;
+
+          if (page !== undefined) {
+            if ($(that.$refs.flipbook).turn(`is`)) {
+              $(that.$refs.flipbook).turn(`page`, page);
+            }
+          }
+        },
+        nop() {
+          if ($(that.$refs.flipbook).turn(`is`)) {
+            $(that.$refs.flipbook).turn(`page`, 1);
+          }
+        },
+      });
     });
   },
   beforeDestroy() {

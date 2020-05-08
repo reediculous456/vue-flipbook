@@ -16,6 +16,9 @@
     "node": true,
     "jquery": true
   },
+  "globals": {
+    "Hash": true
+  },
   "reportUnusedDisableDirectives": true,
   "settings": {
     "import/internal-regex": "^@/"
