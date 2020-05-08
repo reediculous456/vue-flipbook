@@ -30,8 +30,8 @@ export default {
   name: `Flipbook`,
   mounted() {
     $(`#flipbook`).turn({
-      width: 922,
-      height: 600,
+      width: 1100,
+      height: 716,
       elevation: 50,
       gradients: true,
     });
@@ -42,7 +42,7 @@ export default {
 <style lang="scss" scoped>
  #flipbook {
    img {
-     height: 600px;
+     height: 716px;
    }
  }
 </style>
