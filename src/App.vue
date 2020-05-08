@@ -1,9 +1,14 @@
 <template>
   <b-container id="app">
-    <img
-      alt="Vue logo"
-      src="./assets/logo.png"
-    >
+    <b-row>
+      <b-col>
+        <img
+          class="logo"
+          alt="Vue logo"
+          src="./assets/logo.png"
+        >
+      </b-col>
+    </b-row>
     <b-row>
       <b-col class="d-flex justify-content-center">
         <Flipbook />
@@ -23,13 +28,17 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  padding-top: 2rem;
+
+  .logo {
+    max-height: 6rem;
+    margin-bottom: 2rem;
+  }
 }
 </style>
