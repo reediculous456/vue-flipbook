@@ -3,6 +3,22 @@
     ref="flipbook"
     class="flipbook"
   >
+    <!-- Next button -->
+    <div
+      ignore="1"
+      class="next-button"
+      @click="onNextClick"
+    >
+      <b-icon icon="arrow-right" />
+    </div>
+    <!-- Previous button -->
+    <div
+      ignore="1"
+      class="previous-button"
+      @click="onPrevClick"
+    >
+      <b-icon icon="arrow-left" />
+    </div>
     <div class="page">
       <img src="../assets/annualReport/SoIT_AR2020 1.jpeg">
     </div>
@@ -78,12 +94,27 @@ export default {
     };
   },
   mounted() {
+    const that = this;
+
     $(this.$refs.flipbook).turn({
       accelerations: true,
       gradients: true,
       when: {
         turning(e, page) {
           Hash.go(`page/${page}`).update();
+
+          if (page === 1) { $(`.previous-button`).hide(); }
+          else { $(`.previous-button`).show(); }
+
+          if (page === $(that.$refs.flipbook).turn(`pages`)) { $(`.next-button`).hide(); }
+          else { $(`.next-button`).show(); }
+        },
+        turned(e, page) {
+          if (page === 1) { $(`.previous-button`).hide(); }
+          else { $(`.previous-button`).show(); }
+
+          if (page === $(that.$refs.flipbook).turn(`pages`)) { $(`.next-button`).hide(); }
+          else { $(`.next-button`).show(); }
         },
       },
     });
@@ -92,7 +123,6 @@ export default {
       window.addEventListener(`resize`, this.getWindowSize);
       this.getWindowSize();
 
-      const that = this;
       Hash.on(`^page/([0-9]+)$`, {
         yep(path, parts) {
           const [ , page ] = parts;
@@ -141,6 +171,12 @@ export default {
 
       return { width, height };
     },
+    onNextClick() {
+      $(this.$refs.flipbook).turn(`next`);
+    },
+    onPrevClick() {
+      $(this.$refs.flipbook).turn(`previous`);
+    },
   },
 };
 </script>
@@ -164,6 +200,38 @@ export default {
       max-width: 100%;
       height: 100%;
     }
+  }
+
+  .next-button,
+  .previous-button{
+    width:22px;
+    height:100%;
+    position:absolute;
+    top:0;
+    background-color: black;
+    opacity: 0;
+
+    svg {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      fill: white;
+    }
+
+    &:hover {
+      opacity: 0.2;
+    }
+  }
+
+  .next-button{
+    right:-22px;
+    border-radius:0 15px 15px 0;
+  }
+
+  .previous-button{
+    left:-22px;
+    border-radius:15px 0 0 15px;
   }
 }
 </style>
