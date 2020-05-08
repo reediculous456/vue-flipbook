@@ -1,29 +1,34 @@
 <template>
-  <b-container id="app">
-    <b-row>
-      <b-col>
-        <img
-          class="logo"
-          alt="Vue logo"
-          src="./assets/logo.png"
-        >
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col class="d-flex justify-content-center">
-        <Flipbook />
-      </b-col>
-    </b-row>
-  </b-container>
+  <div id="app">
+    <b-container>
+      <b-row>
+        <b-col>
+          <img
+            class="logo"
+            alt="SoIT logo"
+            src="./assets/logo.png"
+          >
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="d-flex justify-content-center">
+          <Flipbook />
+        </b-col>
+      </b-row>
+    </b-container>
+    <Footer />
+  </div>
 </template>
 
 <script>
-import Flipbook from './components/Flipbook.vue';
+import Flipbook from '@/components/Flipbook.vue';
+import Footer from '@/components/Footer.vue';
 
 export default {
   name: `App`,
   components: {
     Flipbook,
+    Footer,
   },
 };
 </script>
@@ -43,6 +48,7 @@ body {
 
   .logo {
     max-height: 6rem;
+    max-width: 100%;
     margin-bottom: 2rem;
   }
 }
