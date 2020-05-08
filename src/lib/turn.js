@@ -1,4 +1,4 @@
-/* eslint-disable sort-keys, eqeqeq, no-case-declarations, no-shadow, prefer-destructuring, no-cond-assign */
+/* eslint-disable sort-keys, eqeqeq, no-case-declarations, no-shadow, no-cond-assign */
 /**
  * turn.js 4th release
  * turnjs.com
@@ -16,7 +16,7 @@
   let hasRot;
   let vendor = ``;
   const version = `4.1.0`;
-  const PI = Math.PI;
+  const { PI } = Math;
   const A90 = PI / 2;
   const isTouch = `ontouchstart` in window;
 
@@ -574,7 +574,7 @@
 
       const range = this.turn(`range`);
 
-      for (page = range[0]; page <= range[1]; page += 1)
+      for ([ page ] = range; page <= range[1]; page += 1)
       { turnMethods._addPage.call(this, page); }
 
     },
@@ -1094,7 +1094,7 @@
           { continue; }
 
           page = data.pages[data.pageMv[i]];
-          opts = page.data().f.opts;
+          ({ opts } = page.data().f);
 
           page.flip(`hideFoldedPage`, animate);
 
@@ -1151,7 +1151,7 @@
       const range = this.turn(`range`, page);
       const missing = [];
 
-      for (p = range[0]; p <= range[1]; p += 1) {
+      for ([ p ] = range; p <= range[1]; p += 1) {
         if (!data.pageObjs[p])
         { missing.push(p); }
       }
@@ -1236,19 +1236,19 @@
       }
 
       if (data.display == `single`) {
-        current = view[0];
-        next = newView[0];
+        [ current ] = view;
+        [ next ] = newView;
       } else if (view[1] && page > view[1]) {
-        current = view[1];
-        next = newView[0];
+        [ , current ] = view;
+        [ next ] = newView;
       } else if (view[0] && page < view[0]) {
-        current = view[0];
-        next = newView[1];
+        [ current ] = view;
+        [ , next ] = newView;
       }
 
       const optsCorners = data.opts.turnCorners.split(`,`);
       const flipData = data.pages[current].data().f;
-      const opts = flipData.opts;
+      const { opts } = flipData;
       const actualPoint = flipData.point;
 
       turnMethods._missing.call(this, page);
@@ -1387,8 +1387,8 @@
 
     _addMotionPage() {
 
-      const opts = $(this).data().f.opts;
-      const turn = opts.turn;
+      const { opts } = $(this).data().f;
+      const { turn } = opts;
       // const dd = turn.data();
 
       turnMethods._addMv.call(turn, opts.page);
@@ -1447,7 +1447,7 @@
 
       // const that = $(e.target);
       // const data = that.data().f;
-      const turn = opts.turn;
+      const { turn } = opts;
       const dd = turn.data();
 
       if (turned) {
@@ -1476,7 +1476,7 @@
 
       // let page;
       const data = $(e.target).data().f;
-      const turn = data.opts.turn;
+      const { turn } = data.opts;
       const turnData = turn.data();
       // const pages = turnData.pages;
 
@@ -1495,7 +1495,7 @@
       let outArea;
       const page = $(e.target);
       const data = page.data().f;
-      const turn = data.opts.turn;
+      const { turn } = data.opts;
       const turnData = turn.data();
 
       if (turnData.display == `single`) {
@@ -1523,7 +1523,7 @@
 
       e.stopPropagation();
 
-      const opts = $(e.target).data().f.opts;
+      const { opts } = $(e.target).data().f;
 
       opts.turn.trigger(`turn`, [ opts.next ]);
 
@@ -1916,7 +1916,7 @@
     _cAllowed() {
 
       const data = this.data().f;
-      const page = data.opts.page;
+      const { page } = data.opts;
       const turnData = data.opts.turn.data();
       const odd = page % 2;
 
@@ -2056,7 +2056,7 @@
       if (!data)
       { return; }
 
-      const opts = data.opts;
+      const { opts } = data;
 
       if (opts.turn) {
         data = opts.turn.data();
@@ -2256,7 +2256,7 @@
           let gradientX;
           let fpageOrigin;
           let parentOrigin;
-          const totalPages = turnData.totalPages;
+          const { totalPages } = turnData;
           const zIndex = data.opts[`z-index`] || totalPages;
           const parentCss = { overflow: `visible` };
           let relX = o.x ? (o.x - point.x) / width : point.x / width;
@@ -2558,7 +2558,7 @@
       if (!data)
       { return; }
 
-      const turn = data.opts.turn;
+      const { turn } = data.opts;
       const turnData = turn.data();
       const place = turnData.pagePlace;
 
@@ -2614,7 +2614,7 @@
       const folding = flipMethods._foldingPage.call(this);
       const dd = this.data();
       const data = dd.f;
-      let visible = data.visible;
+      let { visible } = data;
 
       if (folding) {
 
@@ -2845,7 +2845,7 @@
     _eventStart(e) {
 
       const data = this.data().f;
-      const turn = data.opts.turn;
+      const { turn } = data.opts;
 
       if (!data.corner && !data.disabled && !this.flip(`isTurning`) &&
         data.opts.page == turn.data().pagePlace[data.opts.page])
@@ -2909,7 +2909,7 @@
     _eventEnd() {
 
       const data = this.data().f;
-      const corner = data.corner;
+      const { corner } = data;
 
       if (!data.disabled && corner) {
         if (trigger(`released`, this, [ data.point || corner ]) != `prevented`) {
