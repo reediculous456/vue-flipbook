@@ -8,6 +8,10 @@
           rel="noopener noreferrer"
         >
           Information Technology Solutions Center
+          <img
+            src="../assets/ITSC.png"
+            alt="ITSC Logo"
+          >
         </a>
       </span>
     </b-container>
@@ -30,5 +34,10 @@ export default {
   align-items: center;
   height: auto;
   min-height: 60px;
+
+  img {
+    max-height: 4rem;
+    padding: 0.5rem;
+  }
 }
 </style>
