@@ -1,6 +1,11 @@
 <template>
   <div id="flipbook">
-    <div><img src="../assets/annualReport/SoIT_AR2020 1.jpeg"></div>
+    <div>
+      <img
+        ref="first"
+        src="../assets/annualReport/SoIT_AR2020 1.jpeg"
+      >
+    </div>
     <div><img src="../assets/annualReport/SoIT_AR2020 2.jpeg"></div>
     <div><img src="../assets/annualReport/SoIT_AR2020 3.jpeg"></div>
     <div><img src="../assets/annualReport/SoIT_AR2020 4.jpeg"></div>
@@ -30,19 +35,27 @@ export default {
   name: `Flipbook`,
   mounted() {
     $(`#flipbook`).turn({
-      width: 1100,
-      height: 716,
       elevation: 50,
       gradients: true,
     });
+    // setTimeout(() => {
+    //   $(`#flipbook`).turn({ height: this.$refs.first.clientHeight });
+    // }, 50);
   },
 };
 </script>
 
 <style lang="scss" scoped>
 #flipbook {
+  width: 100%;
+  height: 150%;
+  min-width: 922px;
+  min-height: 600px;
+
   img {
-    height: 716px;
+    width: 100%;
+    min-height: 600px;
+    height: auto;
   }
 }
 </style>
