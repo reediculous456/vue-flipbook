@@ -40,9 +40,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- #flipbook {
-   img {
-     height: 716px;
-   }
- }
+#flipbook {
+  img {
+    height: 716px;
+  }
+}
 </style>
