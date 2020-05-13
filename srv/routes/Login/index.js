@@ -1,4 +1,5 @@
 
+import appRoot from 'app-root-path';
 import express from 'express';
 import { SessionManager } from '../../utils';
 
@@ -11,7 +12,7 @@ router.get(`/`, (req, res, next) => {
         res.redirect(`/admin`);
       })
       .catch(() => {
-        res.send(`login.html`);
+        res.sendFile(`${appRoot}/dist/login.html`);
       });
   } catch (err) {
     next(err);

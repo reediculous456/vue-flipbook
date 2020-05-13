@@ -6,12 +6,13 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "express": "vue-cli-service express:watch",
+    "express": "NODE_ENV=dev vue-cli-service express:watch",
     "express:run": "vue-cli-service express:run"
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
     "arrify": "^2.0.1",
+    "axios": "^0.19.2",
     "bookshelf": "^1.1.1",
     "bookshelf-soft-delete": "^5.0.0",
     "config": "^3.3.1",
@@ -25,6 +26,7 @@
     "morgan": "^1.10.0",
     "pg": "^8.2.0",
     "redis": "^3.0.2",
+    "toastr": "^2.1.4",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
     "winston": "^3.2.1",

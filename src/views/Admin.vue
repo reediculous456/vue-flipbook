@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-col>
-        About
+        Admin
       </b-col>
     </b-row>
   </b-container>
@@ -10,6 +10,6 @@
 
 <script>
 export default {
-  name: `About`,
+  name: `Admin`,
 };
 </script>

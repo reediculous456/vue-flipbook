@@ -6,7 +6,8 @@ import compression from 'compression';
 import config from 'config';
 import express from 'express';
 import session from 'express-session';
-import { ErrorHandler, IndexRoute, logger, RouteLoader } from './utils';
+import appRoot from 'app-root-path';
+import { ErrorHandler, IndexRoute, logger, Morgan, RouteLoader } from './utils';
 
 export default (app, _http) => {
   const RedisStore = ConnectRedis(session);
@@ -32,7 +33,12 @@ export default (app, _http) => {
     extended: false,
   }));
   app.use(boolParser());
-  app.use(express.static(`${__dirname}/../dist`));
+  app.use(express.static(`${appRoot}/dist`));
+
+  if (process.env.NODE_ENV !== `dev`) {
+    app.use(Morgan.before);
+    app.use(Morgan.after);
+  }
 
   RouteLoader(app)
     .then(() => {

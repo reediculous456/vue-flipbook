@@ -1,3 +1,6 @@
+import adminRoutes from './admin';
+import errorRoutes from './error';
+
 export default [
   {
     component: () => import(`../views/Home.vue`),
@@ -7,9 +10,7 @@ export default [
     name: `Home`,
     path: `/`,
   },
-  {
-    component: () => import(`../views/About.vue`),
-    name: `About`,
-    path: `/about`,
-  },
+  ...adminRoutes,
+  // These routes must be last!
+  ...errorRoutes,
 ];
