@@ -5,12 +5,30 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "express": "vue-cli-service express:watch",
+    "express:run": "vue-cli-service express:run"
   },
   "dependencies": {
+    "app-root-path": "^3.0.0",
+    "arrify": "^2.0.1",
+    "bookshelf": "^1.1.1",
+    "bookshelf-soft-delete": "^5.0.0",
+    "config": "^3.3.1",
+    "connect-redis": "^4.0.4",
+    "cookie-parser": "^1.4.5",
     "core-js": "^3.6.4",
+    "express-query-boolean": "^2.0.0",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.2.0",
+    "redis": "^3.0.2",
     "vue": "^2.6.11",
-    "vue-router": "^3.1.6"
+    "vue-router": "^3.1.6",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.7.0",
@@ -32,6 +50,7 @@
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-bootstrap-vue": "~0.6.0",
+    "vue-cli-plugin-express": "^1.0.2",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

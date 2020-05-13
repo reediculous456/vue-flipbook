@@ -1,0 +1,26 @@
+{
+  "server": {
+    "port": 4200
+  },
+  "cache": {
+    "host": "localhost",
+    "port": 6379,
+    "pass": "",
+    "sessionKey": ""
+  },
+  "database": {
+    "dialect": "pg",
+    "connection": {
+      "host": "localhost",
+      "port": 5432,
+      "username": "",
+      "password": "",
+      "database": ""
+    }
+  },
+  "token": {
+    "signingKey": "",
+    "expiration": "10h"
+  },
+  "uploadDir": "./uploads"
+}
