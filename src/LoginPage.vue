@@ -11,6 +11,10 @@
         >
           <div class="block rounded">
             <div class="content">
+              <p class="hidden-xs d-none d-sm-block float-left col-sm-8 alt-wrapping text-white">
+                Sign in to: <br>
+                <strong>https://itsc-flipbook.cech.uc.edu</strong>
+              </p>
               <img
                 class="float-right logo"
                 style="max-height: 74px; max-width: 130px; margin-bottom: 10px;"
@@ -56,6 +60,44 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="col-md-12 text-white">
+                <p>
+                  Need Help?
+                  <br>
+                  <a
+                    href="https://www.uc.edu/PSS/public/ForgottenUsername"
+                    rel="external"
+                    target="_blank"
+                  >Get My Username</a><br>
+                  <a
+                    href="https://www.uc.edu/PSS"
+                    rel="external"
+                    target="_blank"
+                  >Change My Password</a><br>
+                  <a
+                    href="https://www.uc.edu/PSS/public/ForgottenPassword"
+                    rel="external"
+                    target="_blank"
+                  >Forgot My Password</a><br>
+                  Call the <a
+                    href="http://www.uc.edu/ithelp"
+                    rel="external"
+                    target="_blank"
+                  >IT@UC Service Desk</a> at 513-556-HELP(4357) option 2 or 866-397-3382 option 2.
+                  <br>
+                </p>
+                <aside role="complementary">
+                  <br><p>
+                    By using this service you agree to adhere to<br>
+                    <a
+                      href="http://www.uc.edu/infosec/policies.html"
+                      rel="external"
+                      target="_blank"
+                      title="UC Information Security Policies"
+                    >UC Information Security Policies</a>
+                  </p>
+                </aside>
               </div>
             </div>
           </div>
@@ -128,6 +170,14 @@ export default {
   .block {
     background-color: rgba(0,0,0,0.8);
     padding: 20px;
+  }
+
+  .alt-wrapping {
+    word-wrap: break-word;
+  }
+
+  p {
+    font-size: 14px;
   }
 
   a {
