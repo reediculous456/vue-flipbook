@@ -100,10 +100,6 @@ export default {
   @import '~toastr';
   @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300');
 
-  .uc_logo {
-    content: url('~@/assets/uc_logo.png');
-  }
-
   .logo {
     content: url('~@/assets/UC_Logo_White.png');
   }
