@@ -124,7 +124,7 @@ export default {
       try {
         if (this.username && this.password) {
           await LoginService.authenticate(this.username, this.password);
-          window.location.href = `/`;
+          window.location.href = `/admin`;
         } else {
           toastr.error(`You must provide a username and password`);
         }

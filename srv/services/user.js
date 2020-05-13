@@ -1,13 +1,28 @@
 import { jsonify, User } from '../database';
-import { TokenService } from '.';
+import { ActiveDirectoryService, TokenService } from '.';
 
 export const UserService = {
   authenticate: async (username, password) => {
     try {
+      if (!username || !password) {
+        throw new Error(`Invalid parameters provided`);
+      }
+
       const user = await UserService.getByUsername(username.toLowerCase());
-      // if (!authResult) { throw new Error(); }
-      delete user.password;
-      return TokenService.generate({ user });
+
+      if (!user) {
+        throw new Error(`Wrong Username`);
+      }
+
+      await ActiveDirectoryService.authenticate(
+        username,
+        password,
+      );
+
+      return TokenService.generate({
+        role: user.role,
+        user: user.id,
+      });
     } catch {
       throw new Error(`Invalid Username or Password`);
     }
