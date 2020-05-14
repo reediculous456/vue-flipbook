@@ -5,6 +5,7 @@ import Morgan from './Morgan';
 import ResponseHandler from './ResponseHandler';
 import RouteLoader from './RouteLoader';
 import SessionManager from './SessionManager';
+import Upload from './Upload';
 
 export {
   ErrorHandler,
@@ -14,4 +15,5 @@ export {
   ResponseHandler,
   RouteLoader,
   SessionManager,
+  Upload,
 };
