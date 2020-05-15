@@ -11,29 +11,40 @@
   'use strict';
 
   $.extend($.fn, {
-    scissor() {
+    scissor({ isResize = false } = {}) {
       this.each(function() {
         const element = $(this);
-        const pageProperties = {
-          height: element.height(),
-          overflow: `hidden`,
-          width: element.width() / 2,
-        };
-        const newElement = element.clone(true);
 
-        const leftPage = $(`<div />`, { css: pageProperties });
-        const rightPage = $(`<div />`, { css: pageProperties });
+        if (!isResize) {
+          const pageProperties = {
+            height: element.height(),
+            overflow: `hidden`,
+            width: element.width() / 2,
+          };
 
-        element.after(leftPage);
-        leftPage.after(rightPage);
+          const newElement = element.clone(true);
 
-        element.css({
-          marginLeft: 0,
-        }).appendTo(leftPage);
+          const leftPage = $(`<div />`, { css: pageProperties });
+          const rightPage = $(`<div />`, { css: pageProperties });
 
-        newElement.css({
-          marginLeft: -pageProperties.width,
-        }).appendTo(rightPage);
+          element.after(leftPage);
+          leftPage.after(rightPage);
+
+          element.css({
+            marginLeft: 0,
+          }).appendTo(leftPage);
+
+          newElement.css({
+            marginLeft: -pageProperties.width,
+          }).appendTo(rightPage);
+        } else {
+          const firstChild = element.children().first();
+          if (firstChild.hasClass(`double`)) {
+            firstChild.css({
+              marginLeft: -element.width(),
+            });
+          }
+        }
       });
 
       return this;

@@ -62,6 +62,8 @@ export default {
 
           if (page === $(that.$refs.flipbook).turn(`pages`)) { $(`.next-button`).hide(); }
           else { $(`.next-button`).show(); }
+
+          $(`.page.odd`).scissor({ isResize: true });
         },
         turned(e, page) {
           if (page === 1) { $(`.previous-button`).hide(); }
@@ -102,6 +104,7 @@ export default {
     getWindowSize() {
       const { height, width } = this.resize();
       $(this.$refs.flipbook).turn(`size`, width, height);
+      $(`.page.odd`).scissor({ isResize: true });
     },
     resize() {
       const el = this.$refs.flipbook;

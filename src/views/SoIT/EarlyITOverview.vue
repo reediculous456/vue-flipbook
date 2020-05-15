@@ -13,8 +13,8 @@
       <b-col class="d-flex justify-content-center">
         <Flipbook
           :pages="pages"
-          ratio="1.28"
-          padding="0.75"
+          :ratio="1.28"
+          :padding="0.75"
         />
       </b-col>
     </b-row>
