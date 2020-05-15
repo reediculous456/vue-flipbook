@@ -6,10 +6,11 @@ const Bookshelf = bookshelf(knex);
 Bookshelf.plugin(SoftDelete);
 
 const User = Bookshelf.Model.extend({
-  role() {
+  soft: [ `deleted_on` ],
+  tableName: `users`,
+  role() { // eslint-disable-line sort-keys
     return this.belongsTo(Role);
   },
-  tableName: `users`,
 });
 
 const Role = Bookshelf.Model.extend({
