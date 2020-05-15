@@ -22,9 +22,12 @@
     <template v-for="(page, i) in pages">
       <div
         :key="i"
-        class="page"
+        :class="{ 'page': true, 'double': page.isDouble }"
       >
-        <img :src="getImgUrl(page.image)">
+        <img
+          :src="getImgUrl(page.image)"
+          :alt="page.alt"
+        >
       </div>
     </template>
   </div>
@@ -33,19 +36,18 @@
 <script>
 import '@/lib/turn.js';
 import '@/lib/hash.js';
+import '@/lib/scissor.js';
 
 export default {
   name: `Flipbook`,
   props: {
     pages: { required: true, type: Array },
-  },
-  data() {
-    return {
-      ratio: 1.5,
-    };
+    ratio: { type: Number, default: 1.5 },
   },
   mounted() {
     const that = this;
+
+    $(`.flipbook .double`).scissor();
 
     $(this.$refs.flipbook).turn({
       accelerations: true,
@@ -151,8 +153,11 @@ export default {
     height: 100%;
 
     img {
-      max-width: 100%;
       height: 100%;
+    }
+
+    &:not(.double) > img {
+      max-width: 100%;
     }
   }
 
