@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row>
+    <b-row ref="logoRow">
       <b-col>
         <img
           class="logo"
@@ -14,7 +14,8 @@
         <Flipbook
           :pages="pages"
           :ratio="1.28"
-          :padding="0.75"
+          :max-height="maxHeight"
+          @size-changed="calculateFlipbookHeight"
         />
       </b-col>
     </b-row>
@@ -31,6 +32,7 @@ export default {
   },
   data() {
     return {
+      maxHeight: 0,
       pages: [
         { image: `strategicPlan/IT Strategic Plan 1.jpeg`, isDouble: false },
         { image: `strategicPlan/IT Strategic Plan 2.jpeg`, isDouble: true },
@@ -42,13 +44,24 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.$nextTick(() => {
+      this.calculateFlipbookHeight();
+    });
+  },
+  methods: {
+    calculateFlipbookHeight() {
+      this.maxHeight = document.body.clientHeight - this.$refs.logoRow.clientHeight - $(`.footer`).height();
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .logo {
-  max-height: 6rem;
+  height: 5rem;
   max-width: 100%;
+  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 </style>

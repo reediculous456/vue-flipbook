@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row>
+    <b-row ref="logoRow">
       <b-col>
         <img
           class="logo"
@@ -11,7 +11,11 @@
     </b-row>
     <b-row>
       <b-col class="d-flex justify-content-center">
-        <Flipbook :pages="pages" />
+        <Flipbook
+          :pages="pages"
+          :max-height="maxHeight"
+          @size-changed="calculateFlipbookHeight"
+        />
       </b-col>
     </b-row>
   </b-container>
@@ -27,6 +31,7 @@ export default {
   },
   data() {
     return {
+      maxHeight: 0,
       pages: [
         { image: `annualReport/SoIT_AR2020 1.jpeg` },
         { image: `annualReport/SoIT_AR2020 2.jpeg` },
@@ -51,13 +56,24 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.$nextTick(() => {
+      this.calculateFlipbookHeight();
+    });
+  },
+  methods: {
+    calculateFlipbookHeight() {
+      this.maxHeight = document.body.clientHeight - this.$refs.logoRow.clientHeight - $(`.footer`).height();
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .logo {
-  max-height: 6rem;
+  height: 5rem;
   max-width: 100%;
+  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 </style>

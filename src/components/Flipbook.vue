@@ -43,7 +43,12 @@ export default {
   props: {
     pages: { required: true, type: Array },
     ratio: { type: Number, default: 1.5 },
-    padding: { type: Number, default: 0.9 },
+    maxHeight: { required: true, type: Number },
+  },
+  watch: {
+    maxHeight() {
+      this.getWindowSize();
+    },
   },
   mounted() {
     const that = this;
@@ -102,6 +107,7 @@ export default {
   },
   methods: {
     getWindowSize() {
+      this.$emit(`size-changed`);
       const { height, width } = this.resize();
       $(this.$refs.flipbook).turn(`size`, width, height);
       $(`.page.odd`).scissor({ isResize: true });
@@ -114,7 +120,7 @@ export default {
 
       let width = el.clientWidth;
       let height = Math.round(width / this.ratio);
-      const padded = Math.round(document.body.clientHeight * this.padding);
+      const padded = Math.round(this.maxHeight);
 
       // if the height is too big for the window, constrain it
       if (height > padded) {
