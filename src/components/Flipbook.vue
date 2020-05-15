@@ -19,66 +19,14 @@
     >
       <b-icon icon="arrow-left" />
     </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 1.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 2.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 3.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 4.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 5.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 6.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 7.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 8.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 9.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 10.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 11.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 12.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 13.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 14.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 15.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 16.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 17.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 18.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 19.jpeg">
-    </div>
-    <div class="page">
-      <img src="../assets/annualReport/SoIT_AR2020 20.jpeg">
-    </div>
+    <template v-for="(page, i) in pages">
+      <div
+        :key="i"
+        class="page"
+      >
+        <img :src="getImgUrl(page.image)">
+      </div>
+    </template>
   </div>
 </template>
 
@@ -88,6 +36,9 @@ import '@/lib/hash.js';
 
 export default {
   name: `Flipbook`,
+  props: {
+    pages: { required: true, type: Array },
+  },
   data() {
     return {
       ratio: 1.5,
@@ -176,6 +127,9 @@ export default {
     },
     onPrevClick() {
       $(this.$refs.flipbook).turn(`previous`);
+    },
+    getImgUrl(img) {
+      return require(`../assets/${img}`);
     },
   },
 };
