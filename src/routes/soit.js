@@ -15,4 +15,11 @@ export default [
     },
     path: `${BASE_URL}/strategic-plan`,
   },
+  {
+    component: () => import(`@/views/SoIT/EarlyITOverview`),
+    meta: {
+      title: `SoIT Early IT Overview`,
+    },
+    path: `${BASE_URL}/early-it-overview`,
+  },
 ];

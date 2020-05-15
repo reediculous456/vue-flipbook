@@ -43,6 +43,7 @@ export default {
   props: {
     pages: { required: true, type: Array },
     ratio: { type: Number, default: 1.5 },
+    padding: { type: Number, default: 0.9 },
   },
   mounted() {
     const that = this;
@@ -110,7 +111,7 @@ export default {
 
       let width = el.clientWidth;
       let height = Math.round(width / this.ratio);
-      const padded = Math.round(document.body.clientHeight * 0.9);
+      const padded = Math.round(document.body.clientHeight * this.padding);
 
       // if the height is too big for the window, constrain it
       if (height > padded) {
