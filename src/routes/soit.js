@@ -8,4 +8,11 @@ export default [
     },
     path: `${BASE_URL}/annual-report`,
   },
+  {
+    component: () => import(`@/views/SoIT/ITStrategicPlan`),
+    meta: {
+      title: `SoIT Strategic Plan`,
+    },
+    path: `${BASE_URL}/strategic-plan`,
+  },
 ];
