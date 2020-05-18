@@ -38,6 +38,9 @@ import '@/lib/turn.js';
 import '@/lib/hash.js';
 import '@/lib/scissor.js';
 
+const LEFT_ARROW = 37;
+const RIGHT_ARROW = 39;
+
 export default {
   name: `Flipbook`,
   props: {
@@ -82,6 +85,19 @@ export default {
 
     this.$nextTick(function() {
       window.addEventListener(`resize`, this.getWindowSize);
+      window.addEventListener(`keydown`, (e) => {
+        switch (e.keyCode) {
+          case LEFT_ARROW:
+            $(that.$refs.flipbook).turn(`previous`);
+            e.preventDefault();
+            break;
+          case RIGHT_ARROW:
+            $(that.$refs.flipbook).turn(`next`);
+            e.preventDefault();
+            break;
+        }
+      });
+
       this.getWindowSize();
 
       Hash.on(`^page/([0-9]+)$`, {
