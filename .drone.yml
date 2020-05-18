@@ -2,7 +2,7 @@ pipeline:
   build:
     image: node:12.16
     commands:
-      - npm install
+      - npm ci
       - npm run lint
       - npm run build
   ssh-master:
@@ -17,7 +17,7 @@ pipeline:
       - >
         cd /opt/apps/${DRONE_REPO_NAME} &&
         git pull &&
-        npm i --no-save &&
+        npm ci &&
         npm run build &&
         pm2 reload process.json -s
     when:
