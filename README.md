@@ -1,4 +1,4 @@
-# ITSC Flipbook
+# Vue Flipbook
 
 ## Project setup
 ```
