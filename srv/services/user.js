@@ -20,8 +20,10 @@ export const UserService = {
       );
 
       return TokenService.generate({
-        role: user.role,
-        user: user.id,
+        user: {
+          id: user.id,
+          role: user.role,
+        },
       });
     } catch {
       throw new Error(`Invalid Username or Password`);
