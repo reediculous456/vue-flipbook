@@ -12,12 +12,6 @@ module.exports = {
     ],
   },
   pages: {
-    // admin: {
-    //   entry: `src/admin.js`,
-    //   filename: `admin.html`,
-    //   template: `public/admin.html`,
-    //   title: `ITSC Flipbook - Admin`,
-    // },
     index: {
       entry: `src/main.js`,
       filename: `index.html`,
