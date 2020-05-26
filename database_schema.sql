@@ -26,15 +26,15 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.files (
     id integer NOT NULL,
-    name text,
-    localname text,
-    mime_type text,
+    name text NOT NULL,
+    localname text NOT NULL,
+    mime_type text NOT NULL,
     url text,
-    uploaded_on text,
-    uploaded_by text,
-    deleted_on text,
-    deleted_by text,
-    file_size integer
+    uploaded_on timestamp with time zone NOT NULL,
+    uploaded_by integer NOT NULL,
+    deleted_on timestamp with time zone,
+    deleted_by integer,
+    file_size integer NOT NULL
 );
 
 
