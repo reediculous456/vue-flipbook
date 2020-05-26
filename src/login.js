@@ -4,7 +4,6 @@ import toastr from '@/plugins/notifications';
 
 const errorHandler = function(err) {
   toastr.error(err);
-  console.error(err); // eslint-disable-line no-console
 };
 
 Vue.config.devtools = true;

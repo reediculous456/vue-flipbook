@@ -11,6 +11,9 @@ module.exports = {
       }),
     ],
   },
+  devServer: {
+    proxy: `http://localhost:3000`,
+  },
   pages: {
     index: {
       entry: `src/main.js`,
