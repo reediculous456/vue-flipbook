@@ -20,11 +20,17 @@ const Role = Bookshelf.Model.extend({
   },
 });
 
+const File = Bookshelf.Model.extend({
+  soft: [ `deleted_on` ],
+  tableName: `files`,
+});
+
 const jsonify = ele => ele.toJSON();
 
 export {
   Bookshelf,
   User,
   Role,
+  File,
   jsonify,
 };
