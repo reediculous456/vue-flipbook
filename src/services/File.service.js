@@ -12,7 +12,6 @@ export class FileService {
           'Content-Type': `multipart/form-data`,
         },
       })
-
       .then(response => response.data.data);
   }
 }

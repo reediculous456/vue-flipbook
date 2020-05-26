@@ -29,7 +29,6 @@ export default {
     };
   },
   methods: {
-
     async uploadFile() {
       this.disableUpload = true;
       const formData = new FormData();

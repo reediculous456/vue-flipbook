@@ -1,4 +1,3 @@
-/* eslint-disable no-empty-pattern */
 import express from 'express';
 import { ResponseHandler, Upload } from '../../utils';
 import { FileService } from '../../services';
@@ -9,9 +8,8 @@ router.post(`/`,
   Upload.single(`file`),
   async (req, res, next) => {
     try {
-      const { file, file: { filename, mimetype, originalname, size }, params: { }, user } = req;
-
-      console.log(file);
+      // eslint-disable-next-line no-empty-pattern
+      const { file: { filename, mimetype, originalname, size }, params: { }, user } = req;
       await FileService.create({
         file_size: size,
         localname: filename,

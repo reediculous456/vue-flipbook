@@ -9,7 +9,6 @@ export default async (req, res, next) => {
         req.token = token || req.headers.token;
         TokenService.decode(token)
           .then(user => {
-            console.log(user);
             req.user = user;
           });
       });
