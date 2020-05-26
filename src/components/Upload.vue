@@ -4,11 +4,11 @@
       ref="file"
       v-model="file"
       accept=".pdf"
-      :state="fileIsValid"
       required
       placeholder="Choose a .pdf file"
     />
     <b-button
+      :disabled="disableUpload"
       class="mr-2"
       @click="uploadFile"
     >
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       file: null,
-      fileIsValid: null,
+      disableUpload: false,
     };
   },
   methods: {
@@ -35,6 +35,7 @@ export default {
       formData.append(`file`, this.file);
       await FileService.upload({}, formData);
       this.file = null;
+      this.disableUpload = false;
     },
   },
 };
