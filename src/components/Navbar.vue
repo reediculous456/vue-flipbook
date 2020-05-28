@@ -1,30 +1,40 @@
 <template>
   <b-navbar
+    toggleable="sm"
     type="dark"
     variant="dark"
   >
-    <b-navbar-nav>
-      <b-nav-item to="/admin">
-        Home
-      </b-nav-item>
-      <b-nav-item to="/admin/upload">
-        Upload
-      </b-nav-item>
+    <b-navbar-brand>ITSC Flipbook</b-navbar-brand>
 
-      <b-nav-item-dropdown text="User">
-        <b-dropdown-item href="#">
-          Account
-        </b-dropdown-item>
-        <b-dropdown-item href="#">
-          Settings
-        </b-dropdown-item>
-      </b-nav-item-dropdown>
-    </b-navbar-nav>
-    <b-navbar-nav class="ml-auto">
-      <b-nav-item href="/logout">
-        Logout
-      </b-nav-item>
-    </b-navbar-nav>
+    <b-navbar-toggle target="nav-collapse" />
+
+    <b-collapse
+      id="nav-collapse"
+      is-nav
+    >
+      <b-navbar-nav>
+        <b-nav-item to="/admin">
+          Home
+        </b-nav-item>
+        <b-nav-item to="/admin/upload">
+          Upload
+        </b-nav-item>
+
+        <b-nav-item-dropdown text="User">
+          <b-dropdown-item href="#">
+            Account
+          </b-dropdown-item>
+          <b-dropdown-item href="#">
+            Settings
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item href="/logout">
+          Logout
+        </b-nav-item>
+      </b-navbar-nav>
+    </b-collapse>
   </b-navbar>
 </template>
 
