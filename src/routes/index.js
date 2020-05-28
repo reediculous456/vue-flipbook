@@ -4,7 +4,7 @@ import soitRoutes from './soit';
 
 export default [
   {
-    component: () => import(`../views/Home`),
+    component: () => import(`../pages/Home`),
     meta: {
       title: `SoIT Annual Report`,
     },

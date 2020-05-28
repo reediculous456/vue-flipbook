@@ -4,11 +4,11 @@ export default [
   {
     children: [
       {
-        component: () => import(`@/views/Admin/Upload`),
+        component: () => import(`@/pages/Admin/Upload`),
         path: `upload`,
       },
     ],
-    component: () => import(`@/views/Admin`),
+    component: () => import(`@/pages/Admin`),
     meta: {
       title: `ITSC Flipbook - Admin`,
     },
