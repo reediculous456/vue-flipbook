@@ -1,20 +1,19 @@
 <template>
-  <b-container>
-    <b-row>
-      <b-col>
-        <Upload />
-      </b-col>
-    </b-row>
-  </b-container>
+  <div>
+    <Navbar />
+    <b-container>
+      <router-view :key="$route.fullPath" />
+    </b-container>
+  </div>
 </template>
 
 <script>
-import Upload from '@/components/Upload';
+import Navbar from '@/components/Navbar';
 
 export default {
   name: `Admin`,
   components: {
-    Upload,
+    Navbar,
   },
 };
 </script>

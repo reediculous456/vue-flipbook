@@ -4,6 +4,18 @@ import { ResponseHandler } from '../../utils';
 
 export const router = express.Router();
 
+router.get(`/whoami`, (req, res, next) => {
+  try {
+    ResponseHandler(
+      res,
+      `Got logged in user`,
+      { user: req.user },
+    );
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get(`/list`, async (req, res, next) => {
   try {
     const users = await UserService.getList();

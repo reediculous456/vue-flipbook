@@ -1,0 +1,55 @@
+<template>
+  <b-navbar
+    type="dark"
+    variant="dark"
+  >
+    <b-navbar-nav>
+      <b-nav-item to="/admin">
+        Home
+      </b-nav-item>
+      <b-nav-item to="/admin/upload">
+        Upload
+      </b-nav-item>
+
+      <b-nav-item-dropdown text="User">
+        <b-dropdown-item href="#">
+          Account
+        </b-dropdown-item>
+        <b-dropdown-item href="#">
+          Settings
+        </b-dropdown-item>
+      </b-nav-item-dropdown>
+    </b-navbar-nav>
+  </b-navbar>
+</template>
+
+<script>
+import { UserService } from '@/services';
+
+export default {
+  name: `navbar`,
+  data() {
+    return {
+      user: null,
+    };
+  },
+  async created() {
+    this.user = await UserService.whoAmI();
+  },
+  methods: {
+    subIsActive(...paths) {
+      return paths.some(path => this.$route.path.indexOf(path) === 0);
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+  .navbar {
+    margin-bottom: 2rem;
+  }
+
+  .nav-link.router-link-exact-active {
+    color: white;
+  }
+</style>
