@@ -20,6 +20,11 @@
         </b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
+    <b-navbar-nav class="ml-auto">
+      <b-nav-item href="/logout">
+        Logout
+      </b-nav-item>
+    </b-navbar-nav>
   </b-navbar>
 </template>
 
