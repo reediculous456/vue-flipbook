@@ -18,6 +18,7 @@ export default {
 
 <style lang="scss">
 @import '~vue-multiselect/dist/vue-multiselect.min.css';
+@import '~toastr';
 
 body {
   height: 100vh;

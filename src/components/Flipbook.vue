@@ -164,59 +164,59 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.flipbook {
-  margin: 0 auto;
-  width: 100%;
-  height: 90%;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  .flipbook {
+    margin: 0 auto;
+    width: 100%;
+    height: 90%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
-  .page {
-    height: 100%;
-
-    img {
+    .page {
       height: 100%;
+
+      img {
+        height: 100%;
+      }
+
+      &:not(.double) > img {
+        max-width: 100%;
+      }
     }
 
-    &:not(.double) > img {
-      max-width: 100%;
+    .next-button {
+      right: -22px;
+      border-radius: 0 15px 15px 0;
     }
-  }
 
-  .next-button,
-  .previous-button{
-    width:22px;
-    height:100%;
-    position:absolute;
-    top:0;
-    background-color: black;
-    opacity: 0;
+    .previous-button {
+      left: -22px;
+      border-radius: 15px 0 0 15px;
+    }
 
-    svg {
+    .next-button,
+    .previous-button {
+      width: 22px;
+      height: 100%;
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      fill: white;
+      top: 0;
+      background-color: black;
+      opacity: 0;
+
+      svg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        fill: white;
+      }
+
+      &:hover {
+        opacity: 0.2;
+      }
     }
-
-    &:hover {
-      opacity: 0.2;
-    }
   }
-
-  .next-button{
-    right:-22px;
-    border-radius:0 15px 15px 0;
-  }
-
-  .previous-button{
-    left:-22px;
-    border-radius:15px 0 0 15px;
-  }
-}
 </style>

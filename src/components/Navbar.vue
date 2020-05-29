@@ -20,9 +20,9 @@
           Upload
         </b-nav-item>
 
-        <b-nav-item-dropdown text="User">
-          <b-dropdown-item href="#">
-            Account
+        <b-nav-item-dropdown text="Users">
+          <b-dropdown-item to="/admin/roles">
+            Role Assignment
           </b-dropdown-item>
           <b-dropdown-item href="#">
             Settings

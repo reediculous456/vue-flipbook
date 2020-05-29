@@ -8,7 +8,13 @@ Bookshelf.plugin(SoftDelete);
 const User = Bookshelf.Model.extend({
   soft: [ `deleted_on` ],
   tableName: `users`,
-  role() { // eslint-disable-line sort-keys
+  files() { // eslint-disable-line sort-keys
+    return this.hasMany(File);
+  },
+  organizations() {
+    return this.belongsToMany(Organization).through(UserOrganizations);
+  },
+  role() {
     return this.belongsTo(Role);
   },
 });
@@ -23,14 +29,32 @@ const Role = Bookshelf.Model.extend({
 const File = Bookshelf.Model.extend({
   soft: [ `deleted_on` ],
   tableName: `files`,
+  deletor() { // eslint-disable-line sort-keys
+    return this.belongsTo(User);
+  },
+  uploader() {
+    return this.belongsTo(User);
+  },
 });
 
-const jsonify = ele => ele.toJSON();
+const Organization = Bookshelf.Model.extend({
+  tableName: `organizations`,
+  users() {
+    return this.belongsToMany(User).through(UserOrganizations);
+  },
+});
+
+const UserOrganizations = Bookshelf.Model.extend({
+  tableName: `users_organizations`,
+});
+
+const jsonify = ele => ele ? ele.toJSON() : null;
 
 export {
   Bookshelf,
   User,
   Role,
   File,
+  Organization,
   jsonify,
 };

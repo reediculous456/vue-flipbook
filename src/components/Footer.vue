@@ -25,19 +25,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  min-height: 60px;
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    min-height: 60px;
 
-  img {
-    max-height: 4rem;
-    padding: 0.5rem;
+    img {
+      max-height: 4rem;
+      padding: 0.5rem;
+    }
   }
-}
 </style>
