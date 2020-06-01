@@ -6,9 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint; eslint srv --ext .js",
-    "stylelint": "stylelint src/**/*.{vue,scss}",
     "express": "NODE_ENV=dev vue-cli-service express:watch",
-    "express:run": "vue-cli-service express:run"
+    "express:run": "vue-cli-service express:run",
+    "stylelint": "stylelint src/**/*.{vue,scss}"
   },
   "dependencies": {
     "activedirectory2": "^1.3.0",
@@ -62,14 +62,14 @@
     "vue-cli-plugin-express": "^1.0.2",
     "vue-template-compiler": "^2.6.11"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run lint && npm run stylelint"
-    }
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint && npm run stylelint"
+    }
+  }
 }
