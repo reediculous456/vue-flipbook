@@ -1,0 +1,41 @@
+.table.b-table > thead > tr {
+  & > .table-b-table-default {
+    background-color: white;
+  }
+
+  & > [ aria-sort="none" ],
+  & > [ aria-sort="descending" ],
+  & > [ aria-sort="ascending" ] {
+    background-image: none;
+
+    &:before,
+    &:after {
+      position: absolute;
+      bottom: 0.9em;
+      display: block;
+      opacity: 0.3;
+    }
+
+    &:before {
+      right: 1em;
+      content: "\2191";
+    }
+
+    &:after {
+      right: 0.5em;
+      content: "\2193";
+    }
+  }
+
+  & > [ aria-sort="ascending" ] {
+    &:before {
+      opacity: 1;
+    }
+  }
+
+  & > [ aria-sort="descending" ] {
+    &:after {
+      opacity: 1;
+    }
+  }
+}
