@@ -1,3 +1,4 @@
+import { parse } from 'path';
 import express from 'express';
 import { ResponseHandler, Upload } from '../../utils';
 import { FileService } from '../../services';
@@ -14,7 +15,7 @@ router.post(`/`,
         file_size: size,
         localname: filename,
         mime_type: mimetype,
-        name: originalname,
+        name: parse(originalname).name,
         uploaded_by: user.id,
         uploaded_on: new Date(),
       });
