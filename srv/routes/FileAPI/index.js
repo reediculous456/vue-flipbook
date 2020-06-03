@@ -5,6 +5,21 @@ import { FileService } from '../../services';
 
 export const router = express.Router();
 
+router.get(`/`,
+  async (req, res, next) => {
+    try {
+      const files = await FileService.getList();
+
+      ResponseHandler(
+        res,
+        `Successfully Got Files`,
+        { files },
+      );
+    } catch (err) {
+      next(err);
+    }
+  });
+
 router.post(`/`,
   Upload.single(`file`),
   async (req, res, next) => {

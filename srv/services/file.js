@@ -8,6 +8,15 @@ export class FileService {
       .then(jsonify);
   }
 
+  static getList() {
+    return File
+      .fetchAll({
+        require: false,
+        withRelated: [ `organization` ],
+      })
+      .then(jsonify);
+  }
+
   static getByIds(ids) {
     return File
       .where(`id`, `IN`, ids)

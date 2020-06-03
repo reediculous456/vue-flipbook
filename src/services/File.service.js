@@ -14,4 +14,9 @@ export class FileService {
       })
       .then(response => response.data.data);
   }
+
+  static getList() {
+    return Axios.get(`${BASE_URL}`)
+      .then(response => response.data.data.files);
+  }
 }

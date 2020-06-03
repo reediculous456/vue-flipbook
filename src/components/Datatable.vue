@@ -79,7 +79,7 @@
     </b-row>
     <b-row>
       <b-col class="text-left">
-        <p>
+        <p v-if="totalRows">
           Showing
           {{ (currentPage * perPage) - perPage + 1 }}
           to
@@ -93,7 +93,7 @@
       </b-col>
       <b-col>
         <b-pagination
-          v-if="perPage !== -1"
+          v-if="perPage !== -1 && totalRows"
           v-model="currentPage"
           :total-rows="totalRows"
           :per-page="perPage"
@@ -128,6 +128,11 @@ export default {
       currentPage: 1,
       filter: ``,
     };
+  },
+  watch: {
+    items(val) {
+      this.totalRows = val.length;
+    },
   },
   methods: {
     onFiltered(filteredItems, count) {
