@@ -5,6 +5,15 @@
 npm install
 ```
 
+### Install GraphicsMagick (For Image Conversion)
+```
+brew install graphicsmagick
+```
+### Install Ghostscript (For Image Conversion)
+```
+brew install ghostscript
+```
+
 ### Compiles and hot-reloads for development (does not force authentication)
 ```
 npm run serve
