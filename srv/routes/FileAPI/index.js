@@ -1,6 +1,7 @@
 import express from 'express';
+import appRoot from 'app-root-path';
 import { ResponseHandler, Upload } from '../../utils';
-import { FileService } from '../../services';
+import { FileService, PageService } from '../../services';
 
 export const router = express.Router();
 
@@ -9,8 +10,9 @@ router.post(`/`,
   async (req, res, next) => {
     try {
       // eslint-disable-next-line no-empty-pattern
-      const { file: { filename, mimetype, originalname, size }, params: { }, user } = req;
-      await FileService.create({
+      const { file: { filename, mimetype, originalname, path: filepath, size }, params: { }, user } = req;
+
+      const file = await FileService.create({
         file_size: size,
         localname: filename,
         mime_type: mimetype,
@@ -18,6 +20,8 @@ router.post(`/`,
         uploaded_by: user.id,
         uploaded_on: new Date(),
       });
+
+      PageService.bulkCreate(`${appRoot}/${filepath}`, file.id);
 
       ResponseHandler(
         res,
