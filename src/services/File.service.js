@@ -19,4 +19,9 @@ export class FileService {
     return Axios.get(`${BASE_URL}`)
       .then(response => response.data.data.files);
   }
+
+  static getById(id) {
+    return Axios.get(`${BASE_URL}/${id}`)
+      .then(response => response.data.data.file);
+  }
 }

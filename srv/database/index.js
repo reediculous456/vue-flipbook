@@ -30,7 +30,7 @@ const File = Bookshelf.Model.extend({
   soft: [ `deleted_on` ],
   tableName: `files`,
   deletor() { // eslint-disable-line sort-keys
-    return this.belongsTo(User);
+    return this.belongsTo(User, `deleted_by`);
   },
   organization() {
     return this.belongsTo(Organization);
@@ -39,7 +39,7 @@ const File = Bookshelf.Model.extend({
     return this.hasMany(Page);
   },
   uploader() {
-    return this.belongsTo(User);
+    return this.belongsTo(User, `uploaded_by`);
   },
 });
 

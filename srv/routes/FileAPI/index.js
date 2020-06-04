@@ -21,6 +21,21 @@ router.get(`/`,
     }
   });
 
+router.get(`/:id`,
+  async (req, res, next) => {
+    try {
+      const file = await FileService.getById(req.params.id);
+
+      ResponseHandler(
+        res,
+        `Successfully Got File`,
+        { file },
+      );
+    } catch (err) {
+      next(err);
+    }
+  });
+
 router.post(`/`,
   Upload.single(`file`),
   async (req, res, next) => {
