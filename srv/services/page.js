@@ -6,7 +6,7 @@ export class PageService {
     const images = await ImageConverter.convertToBase64Bulk(filepath, -1);
 
     for (const image of images) {
-      Page
+      await Page
         .forge()
         .save({
           file_id,

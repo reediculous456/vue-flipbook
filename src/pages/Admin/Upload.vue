@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col>
-      <Upload />
+      <Upload @uploaded="onFileUploaded" />
     </b-col>
   </b-row>
 </template>
@@ -13,6 +13,11 @@ export default {
   name: `Admin`,
   components: {
     Upload,
+  },
+  methods: {
+    onFileUploaded(file) {
+      console.log(file);
+    },
   },
 };
 </script>
