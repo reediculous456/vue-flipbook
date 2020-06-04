@@ -1,9 +1,25 @@
+import { parse } from 'path';
 import express from 'express';
 import appRoot from 'app-root-path';
 import { ResponseHandler, Upload } from '../../utils';
 import { FileService, PageService } from '../../services';
 
 export const router = express.Router();
+
+router.get(`/`,
+  async (req, res, next) => {
+    try {
+      const files = await FileService.getList();
+
+      ResponseHandler(
+        res,
+        `Successfully Got Files`,
+        { files },
+      );
+    } catch (err) {
+      next(err);
+    }
+  });
 
 router.post(`/`,
   Upload.single(`file`),
@@ -16,7 +32,7 @@ router.post(`/`,
         file_size: size,
         localname: filename,
         mime_type: mimetype,
-        name: originalname,
+        name: parse(originalname).name,
         uploaded_by: user.id,
         uploaded_on: new Date(),
       });

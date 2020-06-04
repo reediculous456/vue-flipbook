@@ -4,6 +4,10 @@ export default [
   {
     children: [
       {
+        component: () => import(`@/pages/Admin/Home`),
+        path: ``,
+      },
+      {
         component: () => import(`@/pages/Admin/Upload`),
         meta: {
           title: `ITSC Flipbook - Upload`,

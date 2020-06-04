@@ -34,6 +34,8 @@ export default {
     align-items: center;
     height: auto;
     min-height: 60px;
+    z-index: 999;
+    background-color: var(--body);
 
     img {
       max-height: 4rem;

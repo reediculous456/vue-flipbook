@@ -35,7 +35,8 @@ CREATE TABLE public.files (
     uploaded_by integer NOT NULL,
     deleted_on timestamp with time zone,
     deleted_by integer,
-    file_size integer
+    file_size integer,
+    published boolean DEFAULT false NOT NULL
 );
 
 

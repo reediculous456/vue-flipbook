@@ -32,6 +32,9 @@ const File = Bookshelf.Model.extend({
   deletor() { // eslint-disable-line sort-keys
     return this.belongsTo(User);
   },
+  organization() {
+    return this.belongsTo(Organization);
+  },
   pages() {
     return this.hasMany(Page);
   },
