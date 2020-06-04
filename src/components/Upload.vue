@@ -19,6 +19,7 @@
 
 <script>
 import { FileService } from '@/services/File.service.js';
+import toastr from '@/plugins/notifications';
 
 export default {
   name: `Upload`,
@@ -33,7 +34,9 @@ export default {
       this.disableUpload = true;
       const formData = new FormData();
       formData.append(`file`, this.file);
-      await FileService.upload({}, formData);
+      toastr.info(`File upload in progress... You will be redirected when it is completed`);
+      const file = await FileService.upload({}, formData);
+      this.$emit(`uploaded`, file);
       this.file = null;
       this.disableUpload = false;
     },

@@ -37,11 +37,12 @@ router.post(`/`,
         uploaded_on: new Date(),
       });
 
-      PageService.bulkCreate(`${appRoot}/${filepath}`, file.id);
+      await PageService.bulkCreate(`${appRoot}/${filepath}`, file.id);
 
       ResponseHandler(
         res,
         `Successfully Created File`,
+        { file },
       );
     } catch (err) {
       next(err);

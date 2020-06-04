@@ -12,7 +12,7 @@ export class FileService {
           'Content-Type': `multipart/form-data`,
         },
       })
-      .then(response => response.data.data);
+      .then(response => response.data.data.file);
   }
 
   static getList() {
