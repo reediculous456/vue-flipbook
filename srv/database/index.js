@@ -35,6 +35,9 @@ const File = Bookshelf.Model.extend({
   organization() {
     return this.belongsTo(Organization);
   },
+  pages() {
+    return this.hasMany(Page);
+  },
   uploader() {
     return this.belongsTo(User);
   },
@@ -51,6 +54,13 @@ const UserOrganizations = Bookshelf.Model.extend({
   tableName: `users_organizations`,
 });
 
+const Page = Bookshelf.Model.extend({
+  tableName: `pages`,
+  file() { // eslint-disable-line sort-keys
+    return this.belongsTo(File);
+  },
+});
+
 const jsonify = ele => ele ? ele.toJSON() : null;
 
 export {
@@ -59,5 +69,6 @@ export {
   Role,
   File,
   Organization,
+  Page,
   jsonify,
 };
