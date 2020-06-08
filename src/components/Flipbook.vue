@@ -46,7 +46,7 @@ export default {
   name: `Flipbook`,
   props: {
     pages: { required: true, type: Array },
-    ratio: { type: Number, default: 1.5 },
+    ratio: { required: true, type: Number },
     maxHeight: { required: true, type: Number },
   },
   watch: {

@@ -37,7 +37,7 @@ CREATE TABLE public.files (
     deleted_by integer,
     file_size integer,
     published boolean DEFAULT false NOT NULL,
-    size_ratio double precision
+    size_ratio double precision DEFAULT '1.5'::double precision NOT NULL
 );
 
 

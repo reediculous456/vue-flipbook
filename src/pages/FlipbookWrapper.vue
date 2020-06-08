@@ -14,7 +14,7 @@
         <Flipbook
           v-if="file"
           :pages="orderBy(file.pages, `page_number`)"
-          :ratio="file.size_ratio ? file.size_ratio : undefined"
+          :ratio="file.size_ratio"
           :max-height="maxHeight"
           @size-changed="calculateFlipbookHeight"
         />
