@@ -36,6 +36,34 @@ router.get(`/:id`,
     }
   });
 
+router.put(`/:id/publish`,
+  async (req, res, next) => {
+    try {
+      const { body: { file, file: { pages } }, params: { id } } = req;
+
+      for (const page of pages) {
+        await PageService.update(page.id, page);
+      }
+
+      delete file.pages;
+      delete file.organization;
+      delete file.uploader;
+
+      file.published = true;
+
+      await FileService.update(id, file);
+      const updatedFile = await FileService.getById(id);
+
+      ResponseHandler(
+        res,
+        `Successfully Published File`,
+        { file: updatedFile },
+      );
+    } catch (err) {
+      next(err);
+    }
+  });
+
 router.post(`/`,
   Upload.single(`file`),
   async (req, res, next) => {

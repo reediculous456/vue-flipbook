@@ -24,4 +24,11 @@ export class FileService {
     return Axios.get(`${BASE_URL}/${id}`)
       .then(response => response.data.data.file);
   }
+
+  static publish(id, file) {
+    return Axios.put(`${BASE_URL}/${id}/publish`, {
+      file,
+    })
+      .then(response => response.data.data.file);
+  }
 }

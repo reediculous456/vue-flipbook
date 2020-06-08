@@ -26,4 +26,13 @@ export class FileService {
       })
       .then(jsonify);
   }
+
+  static async update(id, file) {
+    delete file.id;
+
+    await File
+      .where({ id })
+      .save(file, { patch: true })
+      .then(jsonify);
+  }
 }

@@ -15,6 +15,7 @@
           :disabled="!allowSave"
           block
           variant="success"
+          @click="publish"
         >
           {{ file.published ? `Update` : `Publish` }}
         </b-btn>
@@ -35,7 +36,7 @@
     </b-col>
     <b-col md="8">
       <page-edit
-        v-for="page in file.pages"
+        v-for="page in orderBy(file.pages, `page_number`)"
         :key="page.id"
         :page.sync="page"
       />
@@ -44,9 +45,11 @@
 </template>
 
 <script>
+import { orderBy } from 'lodash';
 import { FileService } from '@/services';
 import FileInfo from '@/components/FileInfo';
 import PageEdit from '@/components/PageEdit';
+import toastr from '@/plugins/notifications';
 
 export default {
   name: `FileEdit`,
@@ -75,6 +78,14 @@ export default {
   async created() {
     this.file = await FileService.getById(this.$route.params.file_id);
     this.contentReady = true;
+  },
+  methods: {
+    async publish() {
+      this.file = await FileService.publish(this.file.id, this.file);
+      this.accessibilityAck = false;
+      toastr.success(`Successfully Published Flipbook`);
+    },
+    orderBy,
   },
 };
 </script>

@@ -1,5 +1,5 @@
 import { ImageConverter } from '../utils';
-import { Page } from '../database';
+import { jsonify, Page } from '../database';
 
 export class PageService {
   static async bulkCreate(filepath, file_id) {
@@ -14,5 +14,14 @@ export class PageService {
           page_number: image.page,
         });
     }
+  }
+
+  static async update(id, page) {
+    delete page.id;
+
+    await Page
+      .where({ id })
+      .save(page, { patch: true })
+      .then(jsonify);
   }
 }
