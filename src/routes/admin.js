@@ -21,6 +21,13 @@ export default [
         },
         path: `roles`,
       },
+      {
+        component: () => import(`@/pages/Admin/FileEdit`),
+        meta: {
+          title: `ITSC Flipbook - Edit File`,
+        },
+        path: `file/:file_id`,
+      },
     ],
     component: () => import(`@/pages/Admin`),
     meta: {

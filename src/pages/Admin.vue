@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="admin">
     <Navbar />
     <b-container>
       <router-view :key="$route.fullPath" />
@@ -15,15 +15,21 @@ export default {
   components: {
     Navbar,
   },
+  beforeCreate() {
+    document.body.style.overflow = `auto`;
+  },
 };
 </script>
 
-<style lang="scss" scoped>
-  body {
-    overflow: auto;
-  }
-
-  #app {
+<style lang="scss">
+  #admin {
     text-align: left;
+  }
+</style>
+
+<style lang="scss" scoped>
+  .container {
+    margin-top: 5rem;
+    margin-bottom: 10rem;
   }
 </style>

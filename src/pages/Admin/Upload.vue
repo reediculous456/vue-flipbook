@@ -10,13 +10,13 @@
 import Upload from '@/components/Upload';
 
 export default {
-  name: `Admin`,
+  name: `FileUpload`,
   components: {
     Upload,
   },
   methods: {
     onFileUploaded(file) {
-      console.log(file);
+      this.$router.push(`/admin/file/${file.id}`);
     },
   },
 };

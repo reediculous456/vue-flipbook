@@ -26,16 +26,20 @@ export default {
 
 <style lang="scss" scoped>
   .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     height: auto;
-    min-height: 60px;
     z-index: 999;
     background-color: var(--body);
+
+    .container {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
 
     img {
       max-height: 4rem;

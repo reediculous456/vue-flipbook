@@ -17,10 +17,22 @@ export class FileService {
       .then(jsonify);
   }
 
-  static getByIds(ids) {
+  static getById(id) {
     return File
-      .where(`id`, `IN`, ids)
-      .fetchAll({ require: true })
+      .where({ id })
+      .fetch({
+        require: true,
+        withRelated: [ `pages`, `organization`, `uploader` ],
+      })
+      .then(jsonify);
+  }
+
+  static async update(id, file) {
+    delete file.id;
+
+    await File
+      .where({ id })
+      .save(file, { patch: true })
       .then(jsonify);
   }
 }

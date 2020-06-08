@@ -5,11 +5,11 @@
       :fields="fields"
       scroll-y="40em"
     >
-      <template v-slot:cell(actions)>
+      <template v-slot:cell(actions)="row">
         <b-button
           size="sm"
           class="mr-1"
-          @click="() => {}"
+          @click="$router.push(`/admin/file/${row.item.id}`)"
         >
           Edit
         </b-button>

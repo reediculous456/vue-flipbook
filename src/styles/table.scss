@@ -1,6 +1,11 @@
+.table td {
+  text-align: center;
+}
+
 .table.b-table > thead > tr {
   & > .table-b-table-default {
     background-color: white;
+    text-align: center;
   }
 
   & > [ aria-sort="none" ],

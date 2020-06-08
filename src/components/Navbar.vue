@@ -3,6 +3,7 @@
     toggleable="sm"
     type="dark"
     variant="dark"
+    fixed="top"
   >
     <b-navbar-brand>ITSC Flipbook</b-navbar-brand>
 
@@ -60,10 +61,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .navbar {
-    margin-bottom: 2rem;
-  }
-
   .nav-link.router-link-exact-active {
     color: white;
   }
