@@ -31,4 +31,9 @@ export class FileService {
     })
       .then(response => response.data.data.file);
   }
+
+  static unpublish(id) {
+    return Axios.put(`${BASE_URL}/${id}/unpublish`)
+      .then(response => response.data.data.file);
+  }
 }

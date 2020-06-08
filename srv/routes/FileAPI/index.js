@@ -64,6 +64,24 @@ router.put(`/:id/publish`,
     }
   });
 
+router.put(`/:id/unpublish`,
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+
+      await FileService.update(id, { published: false });
+      const file = await FileService.getById(id);
+
+      ResponseHandler(
+        res,
+        `Successfully Unpublished File`,
+        { file },
+      );
+    } catch (err) {
+      next(err);
+    }
+  });
+
 router.post(`/`,
   Upload.single(`file`),
   async (req, res, next) => {

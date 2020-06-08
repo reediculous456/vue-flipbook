@@ -23,10 +23,12 @@
           v-if="file.published"
           block
           variant="warning"
+          @click="unpublish"
         >
           Unpublish
         </b-btn>
         <b-btn
+          v-if="!file.published"
           block
           variant="danger"
         >
@@ -84,6 +86,11 @@ export default {
       this.file = await FileService.publish(this.file.id, this.file);
       this.accessibilityAck = false;
       toastr.success(`Successfully Published Flipbook`);
+    },
+    async unpublish() {
+      this.file = await FileService.unpublish(this.file.id);
+      this.accessibilityAck = false;
+      toastr.success(`Successfully Unpublished Flipbook`);
     },
     orderBy,
   },
