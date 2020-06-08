@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import '@/plugins/bootstrap-vue';
+import '@/plugins/globalComponents';
 import App from '@/App.vue';
 import router from '@/plugins/router';
 import toastr from '@/plugins/notifications';

@@ -43,6 +43,13 @@ const File = Bookshelf.Model.extend({
   },
 });
 
+const Flipbook = Bookshelf.Model.extend({
+  tableName: `flipbooks`,
+  file() { // eslint-disable-line sort-keys
+    return this.belongsTo(File);
+  },
+});
+
 const Organization = Bookshelf.Model.extend({
   tableName: `organizations`,
   users() {
@@ -68,6 +75,7 @@ export {
   User,
   Role,
   File,
+  Flipbook,
   Organization,
   Page,
   jsonify,

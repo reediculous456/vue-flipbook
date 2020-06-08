@@ -22,11 +22,12 @@
     <template v-for="(page, i) in pages">
       <div
         :key="i"
-        :class="{ 'page': true, 'double': page.isDouble }"
+        :class="{ 'page': true, 'double': page.is_double }"
       >
         <img
-          :src="getImgUrl(page.image)"
-          :alt="page.alt"
+          :src="`data:image/png;base64,${page.image}`"
+          :alt="page.alt_text"
+          :longdesc="page.long_description"
         >
       </div>
     </template>
@@ -155,9 +156,6 @@ export default {
     },
     onPrevClick() {
       $(this.$refs.flipbook).turn(`previous`);
-    },
-    getImgUrl(img) {
-      return require(`../assets/${img}`);
     },
   },
 };

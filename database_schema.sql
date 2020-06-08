@@ -36,7 +36,8 @@ CREATE TABLE public.files (
     deleted_on timestamp with time zone,
     deleted_by integer,
     file_size integer,
-    published boolean DEFAULT false NOT NULL
+    published boolean DEFAULT false NOT NULL,
+    size_ratio double precision
 );
 
 
@@ -69,6 +70,43 @@ CREATE TABLE public.organizations (
     name text NOT NULL,
     code text NOT NULL
 );
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    name text NOT NULL,
+    email text NOT NULL,
+    phone text,
+    username text NOT NULL,
+    role_id integer NOT NULL,
+    deleted_on timestamp with time zone,
+    last_login timestamp with time zone
+);
+
+
+--
+-- Name: flipbooks; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.flipbooks AS
+ SELECT files.id AS file_id,
+    lower(organizations.code) AS org_code,
+    files.url
+   FROM (public.files
+     JOIN public.organizations ON ((organizations.id = files.organization_id)))
+  WHERE ((organizations.code <> 'PERSONAL'::text) AND (files.deleted_on IS NULL) AND (files.published = true))
+UNION
+ SELECT files.id AS file_id,
+    users.username AS org_code,
+    files.url
+   FROM ((public.files
+     JOIN public.organizations ON ((organizations.id = files.organization_id)))
+     JOIN public.users ON ((users.id = files.uploaded_by)))
+  WHERE ((organizations.code = 'PERSONAL'::text) AND (files.deleted_on IS NULL) AND (files.published = true));
 
 
 --
@@ -155,22 +193,6 @@ CREATE SEQUENCE public.roles_id_seq
 --
 
 ALTER SEQUENCE public.roles_id_seq OWNED BY public.roles.id;
-
-
---
--- Name: users; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.users (
-    id integer NOT NULL,
-    name text NOT NULL,
-    email text NOT NULL,
-    phone text,
-    username text NOT NULL,
-    role_id integer NOT NULL,
-    deleted_on timestamp with time zone,
-    last_login timestamp with time zone
-);
 
 
 --
