@@ -32,7 +32,7 @@
     <b-form-group label="Long description">
       <b-form-textarea
         v-model="page.long_description"
-        placeholder="Write a detailed desciption of everything on the page for screen readers"
+        placeholder="Write a detailed description of everything on the page for screen readers"
       />
     </b-form-group>
   </b-card>
