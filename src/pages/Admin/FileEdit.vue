@@ -45,6 +45,7 @@
       />
     </b-col>
   </b-row>
+  <loader v-else />
 </template>
 
 <script>

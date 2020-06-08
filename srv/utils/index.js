@@ -6,7 +6,7 @@ import ResponseHandler from './ResponseHandler';
 import RouteLoader from './RouteLoader';
 import SessionManager from './SessionManager';
 import Upload from './Upload';
-import ImageConverter from './Image';
+import ImageConverter from './ImageConverter';
 
 export {
   ErrorHandler,

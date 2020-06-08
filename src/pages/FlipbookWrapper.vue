@@ -5,45 +5,50 @@
         <img
           class="logo"
           alt="SoIT logo"
-          src="../../assets/logo.png"
+          src="../assets/logo.png"
         >
       </b-col>
     </b-row>
     <b-row>
       <b-col class="d-flex justify-content-center">
         <Flipbook
-          :pages="pages"
-          :ratio="1.28"
+          v-if="file"
+          :pages="orderBy(file.pages, `page_number`)"
+          :ratio="file.size_ratio"
           :max-height="maxHeight"
           @size-changed="calculateFlipbookHeight"
         />
+        <loader v-else />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import Flipbook from '@/components/Flipbook.vue';
+import { orderBy } from 'lodash';
+import Flipbook from '@/components/Flipbook';
+import { FlipbookService } from '@/services';
 
 export default {
-  name: `EarlyITOverview`,
+  name: `FlipbookWrapper`,
   components: {
     Flipbook,
   },
   data() {
     return {
       maxHeight: 0,
-      pages: [
-        { image: `earlyIT/Early IT Overview 1.jpeg` },
-        { image: `earlyIT/Early IT Overview 2.jpeg` },
-        { image: `earlyIT/Early IT Overview 3.jpeg` },
-        { image: `earlyIT/Early IT Overview 4.jpeg` },
-        { image: `earlyIT/Early IT Overview 5.jpeg` },
-        { image: `earlyIT/Early IT Overview 6.jpeg` },
-        { image: `earlyIT/Early IT Overview 7.jpeg` },
-        { image: `earlyIT/Early IT Overview 8.jpeg` },
-      ],
+      file: null,
     };
+  },
+  async beforeCreate() {
+    const { org_code, url } = this.$route.params;
+    const flipbook = await FlipbookService.get({ org_code, url });
+    if (flipbook) {
+      this.file = flipbook.file;
+      document.title = this.file.name;
+    } else {
+      this.$router.push(`/error/404?message=${encodeURI(`Cannot locate flipbook at "/${org_code}/${url}"`)}`);
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -54,6 +59,7 @@ export default {
     calculateFlipbookHeight() {
       this.maxHeight = document.body.clientHeight - this.$refs.logoRow.clientHeight - $(`.footer`).height();
     },
+    orderBy,
   },
 };
 </script>

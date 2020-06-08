@@ -22,12 +22,4 @@ export default [
     },
     path: `${BASE_URL}/500/:message?`,
   },
-  // This route must be last!
-  {
-    component: () => import(`@/pages/error/Error404`),
-    meta: {
-      title: `404 (Page Not Found)`,
-    },
-    path: `*`,
-  },
 ];

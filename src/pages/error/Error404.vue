@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="mt-4">
     <b-row>
       <b-col>
         <b-card
@@ -10,8 +10,8 @@
             The page/resource you are looking for could not be located.
             Please contact the application support team if the issue continues.
           </p>
-          <p v-if="$route.params.message">
-            {{ $route.params.message }}
+          <p v-if="$route.params.message || $route.query.message">
+            {{ $route.params.message ? $route.params.message : $route.query.message }}
           </p>
         </b-card>
       </b-col>
@@ -22,5 +22,8 @@
 <script>
 export default {
   name: `page-not-found-error`,
+  created() {
+    console.log(this.$route.params);
+  },
 };
 </script>

@@ -45,6 +45,11 @@
           @create-user="createUser"
         />
       </b-card-body>
+      <loader
+        v-else
+        width="350"
+        height="350"
+      />
     </b-collapse>
   </b-card>
 </template>
@@ -57,7 +62,7 @@ import UserDetail from '@/components/User/UserDetail';
 import toastr from '@/plugins/notifications';
 
 export default {
-  name: `box-role-card`,
+  name: `UserRoleCard`,
   components: {
     UserDetail,
     UserCreate,
