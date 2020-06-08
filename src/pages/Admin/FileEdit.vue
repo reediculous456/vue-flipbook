@@ -31,6 +31,7 @@
           v-if="!file.published"
           block
           variant="danger"
+          @click="deleteFile"
         >
           Delete
         </b-btn>
@@ -82,6 +83,13 @@ export default {
     this.contentReady = true;
   },
   methods: {
+    async deleteFile() {
+      if (await this.confirmDelete()) {
+        await FileService.delete(this.file.id);
+        toastr.success(`Successfully Deleted Flipbook`);
+        this.$router.push(`/admin`);
+      }
+    },
     async publish() {
       this.file = await FileService.publish(this.file.id, this.file);
       this.accessibilityAck = false;
@@ -93,6 +101,25 @@ export default {
       toastr.success(`Successfully Unpublished Flipbook`);
     },
     orderBy,
+    async confirmDelete() {
+      return await this.$bvModal.msgBoxConfirm(
+        this.$createElement(`div`, [
+          this.$createElement(`p`, `You are about to delete this file.`),
+          this.$createElement(`p`, `This cannot be undone.`),
+          this.$createElement(`p`, `Would you like to continue?`),
+        ]),
+        {
+          title: `Warning!`,
+          size: `md`,
+          buttonSize: `sm`,
+          okVariant: `danger`,
+          okTitle: `YES`,
+          cancelTitle: `NO`,
+          footerClass: `p-2`,
+          centered: true,
+        },
+      );
+    },
   },
 };
 </script>

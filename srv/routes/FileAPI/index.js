@@ -82,6 +82,25 @@ router.put(`/:id/unpublish`,
     }
   });
 
+router.delete(`/:id`,
+  async (req, res, next) => {
+    try {
+      const { params: { id }, user } = req;
+
+      await FileService.update(id, {
+        deleted_by: user.id,
+        deleted_on: new Date(),
+      });
+
+      ResponseHandler(
+        res,
+        `Successfully Deleted File`,
+      );
+    } catch (err) {
+      next(err);
+    }
+  });
+
 router.post(`/`,
   Upload.single(`file`),
   async (req, res, next) => {
