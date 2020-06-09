@@ -14,6 +14,12 @@
         </b-td>
       </b-tr>
       <b-tr>
+        <b-th>Scale Ratio</b-th>
+        <b-td>
+          {{ file.size_ratio }}
+        </b-td>
+      </b-tr>
+      <b-tr>
         <b-th>Uploaded On</b-th>
         <b-td>
           {{ uploadedOn }}
@@ -31,6 +37,18 @@
           {{ file.published ? `Yes` : `No` }}
         </b-td>
       </b-tr>
+      <b-tr>
+        <b-th>URL</b-th>
+        <b-td>
+          <router-link
+            v-if="file.published"
+            :to="url"
+          >
+            {{ url }}
+          </router-link>
+          <span v-else>{{ url }}</span>
+        </b-td>
+      </b-tr>
     </b-tbody>
   </b-table-simple>
 </template>
@@ -46,6 +64,11 @@ export default {
   computed: {
     uploadedOn() {
       return moment(this.file.uploaded_on).format(`MMM Do, YYYY hh:mm:ss`);
+    },
+    url() {
+      return `/${this.file.organization.code === `PERSONAL` ?
+        this.file.uploader.username :
+        this.file.organization.id}/${this.file.url}`;
     },
   },
 };
