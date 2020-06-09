@@ -22,8 +22,5 @@
 <script>
 export default {
   name: `page-not-found-error`,
-  created() {
-    console.log(this.$route.params);
-  },
 };
 </script>
