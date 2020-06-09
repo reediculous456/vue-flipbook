@@ -12,6 +12,14 @@
           </small>
         </b-form-group>
         <b-btn
+          v-if="!file.published"
+          block
+          variant="success"
+          @click="update"
+        >
+          Save Draft
+        </b-btn>
+        <b-btn
           :disabled="!allowSave"
           block
           variant="success"
@@ -90,6 +98,11 @@ export default {
         toastr.success(`Successfully Deleted Flipbook`);
         this.$router.push(`/admin`);
       }
+    },
+    async update() {
+      this.file = await FileService.update(this.file.id, this.file);
+      this.accessibilityAck = false;
+      toastr.success(`Successfully Updated Flipbook`);
     },
     async publish() {
       this.file = await FileService.publish(this.file.id, this.file);
