@@ -46,6 +46,9 @@
       </b-card>
     </b-col>
     <b-col lg="8">
+      <file-edit
+        :file.sync="file"
+      />
       <page-edit
         v-for="page in orderBy(file.pages, `page_number`)"
         :key="page.id"
@@ -60,13 +63,15 @@
 import { orderBy } from 'lodash';
 import { FileService } from '@/services';
 import FileInfo from '@/components/FileInfo';
+import FileEdit from '@/components/FileEdit';
 import PageEdit from '@/components/PageEdit';
 import toastr from '@/plugins/notifications';
 
 export default {
-  name: `FileEdit`,
+  name: `FileEditPage`,
   components: {
     FileInfo,
+    FileEdit,
     PageEdit,
   },
   data() {

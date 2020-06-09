@@ -1,6 +1,6 @@
 <template>
   <b-card>
-    <Datatable
+    <datatable
       :items="files"
       :fields="fields"
       scroll-y="40em"
@@ -14,7 +14,7 @@
           Edit
         </b-button>
       </template>
-    </Datatable>
+    </datatable>
   </b-card>
 </template>
 
@@ -37,7 +37,7 @@ export default {
         {
           key: `uploaded_on`,
           label: `Uploaded On`,
-          formatter: (value) => moment(value).format(`MMM Do, YYYY hh:mm:ss`),
+          formatter: (value) => moment(value).format(`MMM Do, YYYY hh:mm:ss a`),
           sortable: true,
         },
         {

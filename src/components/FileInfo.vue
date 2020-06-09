@@ -5,21 +5,9 @@
   >
     <b-tbody>
       <b-tr>
-        <b-th>Name</b-th>
-        <b-td>
-          {{ file.name }}
-        </b-td>
-      </b-tr>
-      <b-tr>
         <b-th>Organization</b-th>
         <b-td>
           {{ file.organization.name }}
-        </b-td>
-      </b-tr>
-      <b-tr>
-        <b-th>Scale Ratio</b-th>
-        <b-td>
-          {{ file.size_ratio }}
         </b-td>
       </b-tr>
       <b-tr>
@@ -78,7 +66,7 @@ export default {
   },
   computed: {
     uploadedOn() {
-      return moment(this.file.uploaded_on).format(`MMM Do, YYYY hh:mm:ss`);
+      return moment(this.file.uploaded_on).format(`MMM Do, YYYY hh:mm:ss a`);
     },
     url() {
       return `/${this.file.organization.code === `PERSONAL` ?
