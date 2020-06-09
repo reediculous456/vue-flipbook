@@ -1,6 +1,6 @@
 <template>
   <b-row v-if="contentReady">
-    <b-col md="4">
+    <b-col lg="4">
       <b-card>
         <file-info :file="file" />
         <b-form-group>
@@ -37,7 +37,7 @@
         </b-btn>
       </b-card>
     </b-col>
-    <b-col md="8">
+    <b-col lg="8">
       <page-edit
         v-for="page in orderBy(file.pages, `page_number`)"
         :key="page.id"

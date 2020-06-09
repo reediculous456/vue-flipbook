@@ -27,7 +27,7 @@
 <script>
 import { orderBy } from 'lodash';
 import Flipbook from '@/components/Flipbook';
-import { FlipbookService } from '@/services';
+import { FileService, FlipbookService } from '@/services';
 
 export default {
   name: `FlipbookWrapper`,
@@ -41,9 +41,11 @@ export default {
     };
   },
   async beforeCreate() {
-    const { org_code, url } = this.$route.params;
+    const { file_id, org_code, url } = this.$route.params;
     const flipbook = await FlipbookService.get({ org_code, url });
-    if (flipbook) {
+    if (file_id) {
+      this.file = await FileService.getById(file_id);
+    } else if (flipbook) {
       this.file = flipbook.file;
       document.title = this.file.name;
     } else {

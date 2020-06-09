@@ -35,4 +35,11 @@ export default [
     },
     path: `${BASE_URL}`,
   },
+  {
+    component: () => import(`@/pages/FlipbookWrapper`),
+    meta: {
+      title: `ITSC Flipbook - Edit File`,
+    },
+    path: `${BASE_URL}/preview/:file_id`,
+  },
 ];

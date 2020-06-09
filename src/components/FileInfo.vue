@@ -1,5 +1,8 @@
 <template>
-  <b-table-simple striped>
+  <b-table-simple
+    striped
+    class="file-info-table"
+  >
     <b-tbody>
       <b-tr>
         <b-th>Name</b-th>
@@ -38,15 +41,27 @@
         </b-td>
       </b-tr>
       <b-tr>
-        <b-th>URL</b-th>
+        <b-th v-if="file.published">
+          URL
+        </b-th>
+        <b-th v-else>
+          Preview URL
+        </b-th>
         <b-td>
           <router-link
             v-if="file.published"
             :to="url"
+            target="_blank"
           >
-            {{ url }}
+            {{ hostname }}{{ url }}
           </router-link>
-          <span v-else>{{ url }}</span>
+          <router-link
+            v-else
+            :to="`/admin/preview/${file.id}`"
+            target="_blank"
+          >
+            {{ hostname }}/admin/preview/{{ file.id }}
+          </router-link>
         </b-td>
       </b-tr>
     </b-tbody>
@@ -70,6 +85,17 @@ export default {
         this.file.uploader.username :
         this.file.organization.id}/${this.file.url}`;
     },
+    hostname() {
+      return window.location.host;
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .file-info-table {
+    td {
+      word-break: break-word;
+    }
+  }
+</style>
