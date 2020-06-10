@@ -1,4 +1,4 @@
-# ITSC Flipbook
+# ITSC Flipbook [![Build Status](https://itscci.cech.uc.edu/api/badges/ITSC/Flipbook/status.svg?ref=refs/heads/master)](https://itscci.cech.uc.edu/ITSC/Flipbook)
 
 ## Project setup
 ```
