@@ -71,7 +71,7 @@ export default {
     url() {
       return `/${this.file.organization.code === `PERSONAL` ?
         this.file.uploader.username :
-        this.file.organization.code}/${this.file.url}`;
+        this.file.organization.code.toLowerCase()}/${this.file.url}`;
     },
     hostname() {
       return window.location.host;
