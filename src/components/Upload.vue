@@ -39,7 +39,13 @@
           style="border-bottom-right-radius: 0.25em; border-top-right-radius: 0.25em;"
         />
         <b-form-invalid-feedback
-          v-if="!$v.hasConflictingFiles"
+          v-if="!form.url"
+          id="url-feedback"
+        >
+          This is a required field.
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback
+          v-else-if="!$v.hasConflictingFiles"
           id="url-feedback"
         >
           URL already exists.
