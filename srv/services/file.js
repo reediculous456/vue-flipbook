@@ -27,6 +27,17 @@ export class FileService {
       .then(jsonify);
   }
 
+  static getByUrl({ org_code, organization_id, url, user_id }) {
+    return File
+      .where({
+        organization_id,
+        url,
+        ...org_code === `PERSONAL` && { uploaded_by: user_id },
+      })
+      .fetchAll({ require: false })
+      .then(jsonify);
+  }
+
   static async update(id, file) {
     delete file.id;
 
