@@ -9,7 +9,7 @@ router.get(`/`, async (req, res, next) => {
   try {
     let organizations;
 
-    if (req.user.code === `ADMIN`) {
+    if (req.user.role.code === `ADMIN`) {
       organizations = await OrganizationService.getList();
     }
     else {
