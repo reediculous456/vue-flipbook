@@ -2,7 +2,7 @@ import { parse } from 'path';
 import express from 'express';
 import appRoot from 'app-root-path';
 import { ResponseHandler, Upload } from '../../utils';
-import { FileService, PageService } from '../../services';
+import { FileService, OrganizationService, PageService } from '../../services';
 
 export const router = express.Router();
 
@@ -30,6 +30,23 @@ router.get(`/:id`,
         res,
         `Successfully Got File`,
         { file },
+      );
+    } catch (err) {
+      next(err);
+    }
+  });
+
+router.get(`/url/:url`,
+  async (req, res, next) => {
+    try {
+      const { params: { url }, query: { organization_id }, user } = req;
+      const { code: org_code } = await OrganizationService.getById(organization_id);
+      const files = await FileService.getByUrl({ org_code, organization_id, url, user_id: user.id });
+
+      ResponseHandler(
+        res,
+        `Successfully Got Files`,
+        { files },
       );
     } catch (err) {
       next(err);
@@ -127,20 +144,25 @@ router.delete(`/:id`,
     }
   });
 
-router.post(`/`,
+router.post(`/:organization_id/:url`,
   Upload.single(`file`),
   async (req, res, next) => {
     try {
-      // eslint-disable-next-line no-empty-pattern
-      const { file: { filename, mimetype, originalname, path: filepath, size }, params: { }, user } = req;
+      const {
+        file: { filename, mimetype, originalname, path: filepath, size },
+        params: { organization_id, url },
+        user,
+      } = req;
 
       const file = await FileService.create({
         file_size: size,
         localname: filename,
         mime_type: mimetype,
         name: parse(originalname).name,
+        organization_id,
         uploaded_by: user.id,
         uploaded_on: new Date(),
+        url,
       });
 
       await PageService.bulkCreate(`${appRoot}/${filepath}`, file.id);

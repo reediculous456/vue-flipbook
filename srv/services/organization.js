@@ -13,4 +13,13 @@ export class OrganizationService {
       .fetchAll({ require: true })
       .then(jsonify);
   }
+
+  static getById(id) {
+    return Organization
+      .where({ id })
+      .fetch({
+        require: true,
+      })
+      .then(jsonify);
+  }
 }
