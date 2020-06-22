@@ -34,9 +34,9 @@
           aria-describedby="url-feedback"
           :disabled="!form.organization_id"
           :formatter="urlFormatter"
-          :lazy-formatter="true"
+          lazy-formatter
           lazy
-          style="border-radius: 0.25em;"
+          style="border-bottom-right-radius: 0.25em; border-top-right-radius: 0.25em;"
         />
         <b-form-invalid-feedback
           v-if="!$v.hasConflictingFiles"
