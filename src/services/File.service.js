@@ -3,9 +3,8 @@ import Axios from '@/plugins/http.config';
 const BASE_URL = `/file`;
 
 export class FileService {
-  // eslint-disable-next-line no-empty-pattern
-  static upload({ }, file) {
-    return Axios.post(`${BASE_URL}`,
+  static upload({ organization_id, url }, file) {
+    return Axios.post(`${BASE_URL}/${organization_id}/${url}`,
       file,
       {
         headers: {
@@ -35,6 +34,15 @@ export class FileService {
       file,
     })
       .then(response => response.data.data.file);
+  }
+
+  static getByUrl({ organization_id, url }) {
+    return Axios.get(`${BASE_URL}/url/${url}`, {
+      params: {
+        organization_id,
+      },
+    })
+      .then(response => response.data.data.files);
   }
 
   static publish(id, file) {

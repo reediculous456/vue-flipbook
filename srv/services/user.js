@@ -27,6 +27,7 @@ export class UserService {
         user: {
           id: user.id,
           role: user.role,
+          username: user.username,
         },
       });
     } catch {
@@ -93,7 +94,10 @@ export class UserService {
   static getByIds(ids) {
     return User
       .where(`id`, `IN`, ids)
-      .fetchAll({ require: true })
+      .fetchAll({
+        require: true,
+        withRelated: [ `organizations` ],
+      })
       .then(jsonify);
   }
 

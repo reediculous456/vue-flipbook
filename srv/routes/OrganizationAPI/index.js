@@ -1,12 +1,20 @@
 import express from 'express';
-import { OrganizationService } from '../../services';
+import arrify from 'arrify';
+import { OrganizationService, UserService } from '../../services';
 import { ResponseHandler } from '../../utils';
 
 export const router = express.Router();
 
 router.get(`/`, async (req, res, next) => {
   try {
-    const organizations = await OrganizationService.getList();
+    let organizations;
+
+    if (req.user.code === `ADMIN`) {
+      organizations = await OrganizationService.getList();
+    }
+    else {
+      [{ organizations }] = await UserService.getByIds(arrify(req.user.id));
+    }
 
     ResponseHandler(
       res,
