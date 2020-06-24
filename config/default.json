@@ -1,0 +1,48 @@
+{
+  "server": {
+    "port": 4200
+  },
+  "cache": {
+    "host": "localhost",
+    "port": 6379,
+    "pass": "",
+    "sessionKey": ""
+  },
+  "database": {
+    "dialect": "pg",
+    "connection": {
+      "host": "localhost",
+      "port": 5432,
+      "username": "",
+      "password": "",
+      "database": ""
+    }
+  },
+  "ActiveDirectory": {
+    "url": "ldaps://ldap.com",
+    "domain": "ldap.com",
+    "baseDN": "",
+    "username": "username",
+    "password": "password",
+    "attributes": {
+      "user": [
+        "userPrincipalName",
+        "mail",
+        "sAMAccountName",
+        "sn",
+        "givenName",
+        "cn",
+        "displayName",
+        "telephoneNumber"
+      ]
+    },
+    "tlsOptions": {
+      "rejectUnauthorized": true
+    }
+  },
+  "token": {
+    "signingKey": "",
+    "expiration": "10h"
+  },
+  "uploadDir": "./uploads"
+}

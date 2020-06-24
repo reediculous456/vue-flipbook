@@ -1,0 +1,8 @@
+// Override Bootstrap Vars Here
+@import './variables.scss';
+
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-vue/src/index.scss';
+
+// Override Bootstrap Classes Here
+@import './table.scss'

@@ -1,0 +1,26 @@
+pipeline:
+  build:
+    image: node:12.16
+    commands:
+      - npm ci
+      - npm run lint
+      - npm run build
+  ssh-master:
+    pull: true
+    image: appleboy/drone-ssh:latest
+    host: 10.97.65.149
+    user: itsc
+    secrets: [ ssh_key ]
+    port: 22
+    command_timeout: 5m
+    script:
+      - >
+        cd /opt/apps/${DRONE_REPO_NAME} &&
+        git pull &&
+        npm ci &&
+        npm run build &&
+        pm2 reload process.json -s
+    when:
+      status: success
+      event: [ push ]
+      branch: master

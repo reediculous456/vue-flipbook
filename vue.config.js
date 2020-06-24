@@ -1,14 +1,6 @@
 const { ProvidePlugin } = require(`webpack`);
 
 module.exports = {
-  chainWebpack: config => {
-    config
-      .plugin(`html`)
-      .tap(args => {
-        args[0].title = `SoIT Annual Report`;
-        return args;
-      });
-  },
   configureWebpack: {
     plugins: [
       new ProvidePlugin({
@@ -19,5 +11,26 @@ module.exports = {
       }),
     ],
   },
-  publicPath: process.env.NODE_ENV === `production` ? `/vue-flipbook` : `/`,
+  devServer: {
+    proxy: `http://localhost:3000`,
+  },
+  pages: {
+    index: {
+      entry: `src/main.js`,
+      filename: `index.html`,
+      template: `public/index.html`,
+      title: `ITSC Flipbook`,
+    },
+    login: {
+      entry: `src/login.js`,
+      filename: `login.html`,
+      template: `public/login.html`,
+      title: `ITSC Flipbook - Login`,
+    },
+  },
+  pluginOptions: {
+    express: {
+      serverDir: `./srv`,
+    },
+  },
 };
