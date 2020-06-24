@@ -7,6 +7,7 @@
     <div
       ignore="1"
       class="next-button"
+      aria-hidden="true"
       @click="onNextClick"
     >
       <b-icon icon="arrow-right" />
@@ -15,6 +16,7 @@
     <div
       ignore="1"
       class="previous-button"
+      aria-hidden="true"
       @click="onPrevClick"
     >
       <b-icon icon="arrow-left" />
