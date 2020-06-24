@@ -10,7 +10,7 @@ router.get(`/search`, async (req, res, next) => {
      * if only 1 name passed, use it for the username and lastname
      *  2 names, then split first and last name.
      */
-    const parsedName = req.params.searchTerm.split(` `);
+    const parsedName = req.query.searchTerm.split(` `);
     const [ username ] = parsedName;
     const firstName = parsedName[1] ? parsedName[0] : undefined;
     const lastName = parsedName[1] ? parsedName[1] : parsedName[0];

@@ -24,6 +24,7 @@ yarn-error.log*
 # Configs
 config/*
 !config/default.json
+process.json
 
 # Uploads
 uploads/*

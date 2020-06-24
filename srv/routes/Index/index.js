@@ -10,7 +10,7 @@ router.get(`/logout`, (req, res) => {
   SessionManager
     .destroySession(req)
     .then(() => {
-      res.redirect(`/`);
+      res.redirect(`/login`);
     });
 });
 

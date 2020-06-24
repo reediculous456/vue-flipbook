@@ -1,18 +1,29 @@
 import adminRoutes from './admin';
 import errorRoutes from './error';
-import soitRoutes from './soit';
 
 export default [
   {
-    component: () => import(`../views/Home`),
+    component: () => import(`../pages/Home`),
     meta: {
       title: `SoIT Annual Report`,
     },
     name: `Home`,
     path: `/`,
   },
-  ...soitRoutes,
   ...adminRoutes,
-  // These routes must be last!
   ...errorRoutes,
+  // This route must second be last!
+  {
+    component: () => import(`../pages/FlipbookWrapper`),
+    name: `Flipbook`,
+    path: `/:org_code/:url`,
+  },
+  // This route must be last!
+  {
+    component: () => import(`@/pages/error/Error404`),
+    meta: {
+      title: `404 (Page Not Found)`,
+    },
+    path: `*`,
+  },
 ];

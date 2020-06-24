@@ -4,14 +4,10 @@ import SessionManager from './SessionManager';
 
 export default async (req, res, next) => {
   try {
-    await SessionManager.hasValidSession(req)
-      .then(token => {
-        req.token = token || req.headers.token;
-        TokenService.decode(token)
-          .then(user => {
-            req.user = user;
-          });
-      });
+    const token = await SessionManager.hasValidSession(req);
+    req.token = token || req.headers.token;
+    const user = await TokenService.decode(token);
+    req.user = user;
     next();
   } catch (err) {
     res.redirect(config.loginEntryPoint);

@@ -7,6 +7,7 @@
     <div
       ignore="1"
       class="next-button"
+      aria-hidden="true"
       @click="onNextClick"
     >
       <b-icon icon="arrow-right" />
@@ -15,6 +16,7 @@
     <div
       ignore="1"
       class="previous-button"
+      aria-hidden="true"
       @click="onPrevClick"
     >
       <b-icon icon="arrow-left" />
@@ -22,11 +24,12 @@
     <template v-for="(page, i) in pages">
       <div
         :key="i"
-        :class="{ 'page': true, 'double': page.isDouble }"
+        :class="{ 'page': true, 'double': page.is_double }"
       >
         <img
-          :src="getImgUrl(page.image)"
-          :alt="page.alt"
+          :src="`data:image/png;base64,${page.image}`"
+          :alt="page.alt_text"
+          :longdesc="page.long_description"
         >
       </div>
     </template>
@@ -38,12 +41,20 @@ import '@/lib/turn.js';
 import '@/lib/hash.js';
 import '@/lib/scissor.js';
 
+const LEFT_ARROW = 37;
+const RIGHT_ARROW = 39;
+
 export default {
   name: `Flipbook`,
   props: {
     pages: { required: true, type: Array },
-    ratio: { type: Number, default: 1.5 },
-    padding: { type: Number, default: 0.9 },
+    ratio: { required: true, type: Number },
+    maxHeight: { required: true, type: Number },
+  },
+  watch: {
+    maxHeight() {
+      this.getWindowSize();
+    },
   },
   mounted() {
     const that = this;
@@ -62,6 +73,8 @@ export default {
 
           if (page === $(that.$refs.flipbook).turn(`pages`)) { $(`.next-button`).hide(); }
           else { $(`.next-button`).show(); }
+
+          $(`.page.odd`).scissor({ isResize: true });
         },
         turned(e, page) {
           if (page === 1) { $(`.previous-button`).hide(); }
@@ -75,6 +88,19 @@ export default {
 
     this.$nextTick(function() {
       window.addEventListener(`resize`, this.getWindowSize);
+      window.addEventListener(`keydown`, (e) => {
+        switch (e.keyCode) {
+          case LEFT_ARROW:
+            $(that.$refs.flipbook).turn(`previous`);
+            e.preventDefault();
+            break;
+          case RIGHT_ARROW:
+            $(that.$refs.flipbook).turn(`next`);
+            e.preventDefault();
+            break;
+        }
+      });
+
       this.getWindowSize();
 
       Hash.on(`^page/([0-9]+)$`, {
@@ -100,8 +126,10 @@ export default {
   },
   methods: {
     getWindowSize() {
+      this.$emit(`size-changed`);
       const { height, width } = this.resize();
       $(this.$refs.flipbook).turn(`size`, width, height);
+      $(`.page.odd`).scissor({ isResize: true });
     },
     resize() {
       const el = this.$refs.flipbook;
@@ -111,7 +139,7 @@ export default {
 
       let width = el.clientWidth;
       let height = Math.round(width / this.ratio);
-      const padded = Math.round(document.body.clientHeight * this.padding);
+      const padded = Math.round(this.maxHeight);
 
       // if the height is too big for the window, constrain it
       if (height > padded) {
@@ -131,67 +159,64 @@ export default {
     onPrevClick() {
       $(this.$refs.flipbook).turn(`previous`);
     },
-    getImgUrl(img) {
-      return require(`../assets/${img}`);
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.flipbook {
-  margin: 0 auto;
-  width: 100%;
-  height: 90%;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  .flipbook {
+    margin: 0 auto;
+    width: 100%;
+    height: 90%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
-  .page {
-    height: 100%;
-
-    img {
+    .page {
       height: 100%;
+
+      img {
+        height: 100%;
+      }
+
+      &:not(.double) > img {
+        max-width: 100%;
+      }
     }
 
-    &:not(.double) > img {
-      max-width: 100%;
+    .next-button {
+      right: -22px;
+      border-radius: 0 15px 15px 0;
     }
-  }
 
-  .next-button,
-  .previous-button{
-    width:22px;
-    height:100%;
-    position:absolute;
-    top:0;
-    background-color: black;
-    opacity: 0;
+    .previous-button {
+      left: -22px;
+      border-radius: 15px 0 0 15px;
+    }
 
-    svg {
+    .next-button,
+    .previous-button {
+      width: 22px;
+      height: 100%;
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      fill: white;
+      top: 0;
+      background-color: black;
+      opacity: 0;
+
+      svg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        fill: white;
+      }
+
+      &:hover {
+        opacity: 0.2;
+      }
     }
-
-    &:hover {
-      opacity: 0.2;
-    }
   }
-
-  .next-button{
-    right:-22px;
-    border-radius:0 15px 15px 0;
-  }
-
-  .previous-button{
-    left:-22px;
-    border-radius:15px 0 0 15px;
-  }
-}
 </style>
