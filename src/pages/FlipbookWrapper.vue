@@ -4,7 +4,7 @@
       <b-col>
         <img
           class="logo"
-          alt="SoIT logo"
+          alt="University of Cincinnati, School of Information Technology Logo"
           src="../assets/logo.png"
         >
       </b-col>
