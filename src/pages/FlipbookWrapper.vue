@@ -1,12 +1,18 @@
 <template>
   <b-container>
-    <b-row ref="logoRow">
+    <b-row
+      ref="logoRow"
+      class="title-row"
+    >
       <b-col>
         <img
           class="logo"
           alt="University of Cincinnati, School of Information Technology Logo"
           src="../assets/logo.png"
         >
+        <h1 v-if="file">
+          {{ file.name }}
+        </h1>
       </b-col>
     </b-row>
     <b-row>
@@ -67,10 +73,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .logo {
-    height: 5rem;
-    max-width: 100%;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  .title-row {
+    margin-bottom: 1rem;
+
+    .logo {
+      height: 5rem;
+      max-width: 100%;
+      max-height: 100px;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
   }
 </style>
