@@ -5,6 +5,7 @@
         <b-card
           bg-variant="light"
           title="403: Forbidden"
+          title-tag="h1"
         >
           <p>
             You are not allowed to access this page/resource.

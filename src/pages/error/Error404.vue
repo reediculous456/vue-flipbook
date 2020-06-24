@@ -5,6 +5,7 @@
         <b-card
           bg-variant="light"
           title="404: Resource Not Found"
+          title-tag="h1"
         >
           <p>
             The page/resource you are looking for could not be located.

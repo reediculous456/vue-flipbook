@@ -5,6 +5,7 @@
         <b-card
           bg-variant="light"
           title="500: Server Error"
+          title-tag="h1"
         >
           <p>
             An unknown error has occurred. Please contact the application support team if the issue continues.
