@@ -45,5 +45,9 @@ export default {
       max-height: 4rem;
       padding: 0.5rem;
     }
+
+    a {
+      color: #0068d6;
+    }
   }
 </style>
